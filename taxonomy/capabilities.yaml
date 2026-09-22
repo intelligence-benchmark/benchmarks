@@ -15,234 +15,1503 @@ description: >
   terms must stay stable, mutually distinguishable, and applied sparingly. A derived 13-group
   rollup supplies the matrix columns and is never hand-tagged.
 
-# The 44 ids and labels are laid down here by P0-S1-T04 so the partition in
-# capability_groups.yaml can be checked (9g). Each record is completed by P0-S2-T01,
-# which authors the definition, the inclusion and exclusion tests, the examples and
-# the per-term `source` attribution -- HELM is ancestry for this facet (02 S1), so a
-# blanket `source: own` here would be a false provenance claim.
+# Authored by P0-S2-T01. Each record carries a one-sentence definition, an operational
+# inclusion test, an operational exclusion test and at least two examples of which at
+# least one is a near-miss with its reason stated (03 S5). The near-miss is the single
+# highest-value line in the record: positive examples teach almost nothing, because a
+# curator about to mis-tag something is already convinced it fits.
+#
+# `source` is present only where the corpus documents the provenance. HELM is ancestry
+# for this facet (02 S1), but the per-term mapping lives in taxonomy/crosswalks/helm.yaml,
+# which 05 S2 declares and no task produces. Attributing terms to HELM by guess would be
+# a false provenance claim, so the field is absent rather than defaulted.
+#
+# Example refs are forward references: they name real benchmarks that Phase 1 curates.
+# 02 S11 rule 8 anticipates this -- examples are drawn from real catalogued benchmarks,
+# and the corpus does not exist yet. Every ref below was checked against the plan corpus
+# before this file was written.
 
 terms:
   - id: knowledge-recall
     label: Knowledge recall
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      The ability to produce information the system already holds, where the task supplies no
+      source containing the answer.
+    inclusion_test: >
+      Tag this if a scored item can only be answered from information the system brought with
+      it, and no passage, tool or retrieval step in the protocol supplies the answer.
+    exclusion_test: >
+      Do NOT tag this if the answer appears in the prompt or in material the benchmark provides,
+      and do NOT tag it merely because answering requires background knowledge on the way to a
+      different scored outcome.
+    examples:
+      - ref: gpqa-diamond
+        qualifies: true
+        why: >
+          Graduate-level questions answered closed-book; the protocol supplies no source, so
+          possessing the fact is what is scored.
+      - ref: mmlu-pro
+        qualifies: true
+        why: >
+          Ten-option multiple choice across 14 subjects with no supplied passage.
+      - ref: swe-bench-verified
+        qualifies: false
+        why: >
+          NEAR MISS. Solving an issue plainly requires knowing the library, but the repository
+          is supplied and the score is whether the tests pass. Knowledge is an input, not the
+          measured quantity.
+    see_also: [factual-precision, context-integration]
+    not_to_be_confused_with:
+      - term: context-integration
+        distinction: >
+          `context-integration` is answering from material the protocol supplies;
+          `knowledge-recall` is answering when it supplies none. The discriminant is whether the
+          source is in the prompt.
+
   - id: factual-precision
     label: Factual precision
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      The correctness of individual asserted particulars -- names, numbers, dates, citations --
+      inside an otherwise free-form output.
+    inclusion_test: >
+      Tag this if the scoring function checks asserted particulars against a reference one by
+      one, independently of whether the response as a whole is well-formed.
+    exclusion_test: >
+      Do NOT tag this if the benchmark scores one short answer against a key, and do NOT tag it
+      where the only judgement is overall helpfulness or preference.
+    examples:
+      - ref: healthbench
+        qualifies: true
+        why: >
+          48,562 physician-authored rubric criteria score particulars within long free-form
+          clinical replies.
+      - ref: rexrank
+        qualifies: true
+        why: >
+          Eight report-generation metrics score whether the stated radiological findings are the
+          ones present.
+      - ref: gpqa-diamond
+        qualifies: false
+        why: >
+          NEAR MISS. Accuracy on hard factual questions, but a selected option is not an
+          asserted particular inside free-form output. That is `knowledge-recall`.
+    see_also: [knowledge-recall, honesty]
+    not_to_be_confused_with:
+      - term: honesty
+        distinction: >
+          `honesty` concerns whether the system asserts what it believes; `factual-precision`
+          concerns whether the assertion is correct. A confidently wrong particular is a
+          precision failure, not a dishonesty one.
+
   - id: deductive-reasoning
     label: Deductive reasoning
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Drawing conclusions that follow necessarily from stated premises or rules, checkable
+      against those premises.
+    inclusion_test: >
+      Tag this if correctness is decidable from the stated premises alone, without appeal to
+      world knowledge or to evidence outside the item.
+    exclusion_test: >
+      Do NOT tag this if the conclusion is merely plausible given the premises, and do NOT tag
+      it where the difficulty is recalling a theorem rather than applying it.
+    examples:
+      - ref: frontiermath
+        qualifies: true
+        why: >
+          Problems whose answers are checkable and follow from the stated mathematical setting.
+      - ref: planbench
+        qualifies: true
+        why: >
+          Blocksworld-descended items where a plan's validity follows necessarily from the
+          stated action model.
+      - ref: gpqa-diamond
+        qualifies: false
+        why: >
+          NEAR MISS. Graduate-level difficulty and a known chance baseline, but the questions
+          turn on domain knowledge rather than on entailment from stated premises.
+    see_also: [quantitative-reasoning, constraint-satisfaction]
+    not_to_be_confused_with:
+      - term: abductive-reasoning
+        distinction: >
+          Deduction guarantees its conclusion from the premises; abduction selects the best
+          available explanation and can be wrong while remaining well-reasoned.
+
   - id: inductive-reasoning
     label: Inductive reasoning
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Generalising a rule from a finite set of observed examples, where the examples are the
+      evidence for the rule.
+    inclusion_test: >
+      Tag this if the benchmark supplies observations and scores a rule, law or generalisation
+      inferred from them.
+    exclusion_test: >
+      Do NOT tag this if the rule is given and only instantiated, and do NOT tag it where the
+      task is to see the input differently rather than to accumulate evidence.
+    examples:
+      - ref: srbench
+        qualifies: true
+        why: >
+          Symbolic regression over ground-truth physical equations; the observations are the
+          evidence and the scored output is the law.
+      - ref: llm-srbench
+        qualifies: true
+        why: >
+          Same shape, evaluated on language models, with symbolic equivalence as the criterion.
+      - ref: arc-agi
+        qualifies: false
+        why: >
+          NEAR MISS. Few demonstration pairs per task, so it looks evidential, but the
+          difficulty is representational -- 02 S4.2 assigns it to `abstraction`.
+    see_also: [abstraction, hypothesis-generation]
+    not_to_be_confused_with:
+      - term: abstraction
+        distinction: >
+          The discriminant is where the novelty sits: representation for abstraction, quantity
+          of evidence for induction (02 S4.2).
+
   - id: abductive-reasoning
     label: Abductive reasoning
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Selecting the explanation that best accounts for an observation, where the conclusion is
+      supported but not entailed.
+    inclusion_test: >
+      Tag this if the benchmark presents evidence and scores which explanation the system
+      settles on.
+    exclusion_test: >
+      Do NOT tag this if the conclusion follows necessarily from the stated premises, and do NOT
+      tag it where the task is to propose candidates rather than to choose among them.
+    examples:
+      - ref: agentclinic
+        qualifies: true
+        why: >
+          A diagnosis is the best explanation of the findings gathered, and remains defeasible
+          as more are gathered.
+      - ref: bixbench
+        qualifies: true
+        why: >
+          Analysis scenarios in which the scored result is the reading the data best supports.
+      - ref: planbench
+        qualifies: false
+        why: >
+          NEAR MISS. Reasoning about actions and states, but plan validity follows necessarily
+          from the stated action model, which makes it deduction.
+    see_also: [causal-reasoning, hypothesis-generation]
+    not_to_be_confused_with:
+      - term: hypothesis-generation
+        distinction: >
+          `hypothesis-generation` scores the candidates produced; `abductive-reasoning` scores
+          which candidate is selected.
+
   - id: causal-reasoning
     label: Causal reasoning
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Reasoning about why an outcome occurred and what would follow under intervention, as
+      distinct from what co-occurs.
+    inclusion_test: >
+      Tag this if correctness depends on distinguishing cause from correlation, or on predicting
+      the effect of an intervention that was not observed.
+    exclusion_test: >
+      Do NOT tag this if the benchmark scores predictive accuracy on observational data alone,
+      and do NOT tag it for temporal ordering without a causal claim.
+    examples:
+      - ref: virtual-cell-challenge-2026
+        qualifies: true
+        why: >
+          Zero-shot prediction of CRISPRi knockdown response is a claim about an intervention,
+          in cell lines never observed under it.
+      - ref: open-problems-op3
+        qualifies: true
+        why: >
+          Perturbation response across 146 compounds, scored as the effect of the intervention.
+      - ref: forecastbench
+        qualifies: false
+        why: >
+          NEAR MISS. Predicts outcomes that have not happened, but makes no claim about
+          intervention; it is `probabilistic-forecasting`.
+    see_also: [abductive-reasoning, experimental-design]
+    not_to_be_confused_with:
+      - term: temporal-reasoning
+        distinction: >
+          Temporal order is necessary for causation and nowhere near sufficient; tag this only
+          where an intervention or a confound is at stake.
+
   - id: analogical-reasoning
     label: Analogical reasoning
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Mapping the structure of one situation onto another so that a solution transfers between
+      them.
+    inclusion_test: >
+      Tag this if the benchmark requires recognising that two differently-presented problems
+      share a structure, and scores the transfer.
+    exclusion_test: >
+      Do NOT tag this if the two situations share surface features rather than structure, and do
+      NOT tag it where transfer is between training and test distributions rather than between
+      two presented cases.
+    examples:
+      - ref: arc-agi
+        qualifies: true
+        why: >
+          Demonstration pairs must be mapped structurally onto a held-out input; surface
+          similarity is deliberately unhelpful.
+      - ref: bigbench
+        qualifies: true
+        why: >
+          Carries analogy-structured tasks in which the mapping, not the content, is scored.
+      - ref: mmlu-pro
+        qualifies: false
+        why: >
+          NEAR MISS. Broad coverage including reasoning items, but nothing requires mapping one
+          presented structure onto another.
+    see_also: [abstraction, transfer-learning]
+    not_to_be_confused_with:
+      - term: transfer-learning
+        distinction: >
+          `transfer-learning` concerns carrying competence across datasets or tasks during
+          learning; `analogical-reasoning` concerns mapping between two situations within a
+          single scored item.
+
   - id: abstraction
     label: Abstraction
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Deriving a rule or representation that is not present in the surface form of the input.
+    inclusion_test: >
+      Tag this if the novelty the benchmark tests is in the representation -- the solver must
+      find the right way to see the problem before any answer is available.
+    exclusion_test: >
+      Do NOT tag this if the rule is stated and only has to be applied, and do NOT tag it where
+      the difficulty lies in the amount of evidence rather than in its form.
+    examples:
+      - ref: arc-agi
+        qualifies: true
+        why: >
+          Each task withholds its own transformation rule; finding the representation is the
+          task.
+      - ref: simplebench
+        qualifies: false
+        why: >
+          NEAR MISS. Questions designed so surface reading misleads, but the required insight is
+          everyday physical and social knowledge, not a representation absent from the input.
+      - ref: srbench
+        qualifies: false
+        why: >
+          NEAR MISS. Recovers a hidden law, but from a finite set of observations, which makes
+          the novelty evidential. 02 S4.2 assigns that to `inductive-reasoning`.
+    see_also: [inductive-reasoning, compositional-generalization, analogical-reasoning]
+    not_to_be_confused_with:
+      - term: inductive-reasoning
+        distinction: >
+          If the novelty is in the representation it is abstraction; if it is in the quantity of
+          evidence it is induction (02 S4.2).
+      - term: compositional-generalization
+        distinction: >
+          If the novelty is in the arrangement of known primitives it is compositional
+          generalization (02 S4.2).
+
   - id: quantitative-reasoning
     label: Quantitative reasoning
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Arriving at a numerically correct result through calculation, estimation or manipulation
+      of quantities.
+    inclusion_test: >
+      Tag this if the scored answer is a number, an expression or a quantity, and the path to it
+      involves arithmetic, algebra or numerical estimation.
+    exclusion_test: >
+      Do NOT tag this if numbers appear only as labels or options, and do NOT tag it where the
+      quantity is read off a supplied table without manipulation.
+    examples:
+      - ref: frontiermath
+        qualifies: true
+        why: >
+          Research-level problems whose answers are exact values a grader can check
+          automatically.
+      - ref: critpt
+        qualifies: true
+        why: >
+          71 research-level physics challenges scored on quantitatively correct results.
+      - ref: mmlu-pro
+        qualifies: false
+        why: >
+          NEAR MISS. Includes mathematics among its subjects, but the scored act is selecting an
+          option, and the benchmark's own subject is breadth of knowledge rather than
+          calculation.
+    see_also: [deductive-reasoning, optimization]
+
   - id: spatial-reasoning
     label: Spatial reasoning
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
     # homograph with a subdomain leaf; declared in homographs.yaml (9d)
+    definition: >
+      Reasoning about position, shape, orientation and relation in space, whether the space is
+      perceived or described.
+    inclusion_test: >
+      Tag this if correctness depends on spatial relations that must be inferred rather than
+      read off.
+    exclusion_test: >
+      Do NOT tag this if spatial words appear but the answer is recalled, and do NOT tag it
+      where the scored quantity is reconstruction accuracy rather than a spatial inference.
+    examples:
+      - ref: arc-agi
+        qualifies: true
+        why: >
+          Grid transformations turn on spatial relations that are never stated.
+      - ref: geo-bench-2
+        qualifies: true
+        why: >
+          Geospatial questions whose answers depend on inferred spatial relations.
+      - ref: scannetpp
+        qualifies: false
+        why: >
+          NEAR MISS. Thoroughly spatial, but the score is reconstruction and segmentation
+          quality -- recovering the signal, which is `perception`.
+    see_also: [perception, abstraction]
+
   - id: temporal-reasoning
     label: Temporal reasoning
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
     # homograph with a subdomain leaf; declared in homographs.yaml (9d)
+    definition: >
+      Reasoning about order, duration and change over time.
+    inclusion_test: >
+      Tag this if correctness depends on when things happened relative to one another, or on how
+      long they lasted.
+    exclusion_test: >
+      Do NOT tag this if events are merely listed in order, and do NOT tag it where the claim is
+      causal rather than temporal.
+    examples:
+      - ref: medagentbench-v2
+        qualifies: true
+        why: >
+          Tasks against a live FHIR record turn on the order and spacing of recorded events.
+      - ref: dcase-2026
+        qualifies: true
+        why: >
+          Sound event detection and localisation scores onset and offset times, not just
+          presence.
+      - ref: coco
+        qualifies: false
+        why: >
+          NEAR MISS. Video-adjacent successors exist, but detection on still images has no
+          temporal extent to reason about.
+    see_also: [causal-reasoning, memory-retention]
+    not_to_be_confused_with:
+      - term: causal-reasoning
+        distinction: >
+          Temporal order is necessary for causation and nowhere near sufficient.
+
   - id: perception
     label: Perception
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Extracting structure from a raw sensory or simulated signal.
+    inclusion_test: >
+      Tag this if the input is an image, video, audio stream, point cloud or comparable raw
+      signal and the score measures what was recovered from it.
+    exclusion_test: >
+      Do NOT tag this if the signal is described in words rather than presented, and do NOT tag
+      it where symbols must be bound to referents -- that is grounding.
+    examples:
+      - ref: coco
+        qualifies: true
+        why: >
+          Detection and segmentation scored directly on image content.
+      - ref: scannetpp
+        qualifies: true
+        why: >
+          Dense 3D scene understanding scored as mIoU over the reconstructed signal.
+      - ref: open-asr-leaderboard
+        qualifies: true
+        why: >
+          Word error rate over raw audio.
+      - ref: mmlu-pro
+        qualifies: false
+        why: >
+          NEAR MISS. Multimodal-adjacent subjects appear, but the input is text and nothing is
+          recovered from a signal.
+    see_also: [grounding, spatial-reasoning]
+    not_to_be_confused_with:
+      - term: grounding
+        distinction: >
+          Perception without language is not grounding (02 S4.2). Grounding requires symbols
+          bound to referents.
+
   - id: sensorimotor-control
     label: Sensorimotor control
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    source: own
+    definition: >
+      Closed-loop control of a physical or simulated body.
+    inclusion_test: >
+      Tag this if actions are issued to a body, the environment responds, and the score depends
+      on the resulting physical behaviour.
+    exclusion_test: >
+      Do NOT tag this if the environment is symbolic with no body, and do NOT tag it where a
+      trajectory is produced open-loop and never executed.
+    examples:
+      - ref: humanoidbench
+        qualifies: true
+        why: >
+          Whole-body humanoid control over 27 to 31 tasks on a simulated Unitree H1 with
+          dexterous hands.
+      - ref: mujoco-gymnasium
+        qualifies: true
+        why: >
+          Continuous control benchmarks in which the scored quantity is the controller's
+          behaviour.
+      - ref: planbench
+        qualifies: false
+        why: >
+          NEAR MISS. Actions and states throughout, but the action model is symbolic; there is
+          no body and no closed loop.
+    see_also: [grounding, long-horizon-execution]
+
   - id: grounding
     label: Grounding
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Binding symbols to the referents they denote in a perceived or simulated world.
+    inclusion_test: >
+      Tag this if the benchmark scores whether a linguistic expression was correctly attached to
+      an object, location or event in a presented world.
+    exclusion_test: >
+      Do NOT tag this if the task is recovering structure from a signal with no symbol to bind,
+      and do NOT tag it for text-only reference resolution.
+    examples:
+      - ref: osworld-2-0
+        qualifies: true
+        why: >
+          Instructions name interface elements that must be located in live application state
+          before acting.
+      - ref: libero
+        qualifies: true
+        why: >
+          Language-conditioned manipulation in which the instruction's nouns must attach to
+          objects in the scene.
+      - ref: coco
+        qualifies: false
+        why: >
+          NEAR MISS. Objects are localised and labelled, but from a fixed category set rather
+          than from a linguistic expression to be resolved.
+    see_also: [perception, sensorimotor-control]
+    not_to_be_confused_with:
+      - term: perception
+        distinction: >
+          Perception recovers structure; grounding attaches language to it. A detector with a
+          fixed label set is doing the first only.
+
   - id: planning
     label: Planning
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
     # homograph with a subdomain leaf; declared in homographs.yaml (9d)
+    definition: >
+      Constructing a sequence of actions that would achieve a goal, scored as a property of the
+      sequence.
+    inclusion_test: >
+      Tag this if the benchmark scores the plan -- its validity, cost or optimality -- whether
+      or not it is then executed.
+    exclusion_test: >
+      Do NOT tag this if the score depends on what a rollout achieved rather than on the plan
+      itself, and do NOT tag it where the sequence is produced in one generation with no goal
+      state to satisfy.
+    examples:
+      - ref: planbench
+        qualifies: true
+        why: >
+          Plan validity against a stated action model is the scored quantity.
+      - ref: kaggle-game-arena
+        qualifies: true
+        why: >
+          Move selection under an explicit objective, scored by outcome against opponents.
+      - ref: swe-bench-verified
+        qualifies: false
+        why: >
+          NEAR MISS. Solving an issue requires a plan, but the score is whether the tests pass
+          after the patch, which measures the rollout, not the plan.
+    see_also: [search-exploration, long-horizon-execution]
+    not_to_be_confused_with:
+      - term: long-horizon-execution
+        distinction: >
+          `planning` is about producing a correct sequence; `long-horizon-execution` is about
+          surviving it. A benchmark that scores the plan but never executes it gets `planning`
+          only.
+
   - id: long-horizon-execution
     label: Long-horizon execution
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    source: own
+    definition: >
+      The ability to carry a single task through many dependent steps, where an error at any
+      step is not recoverable by the later steps and the system must retain and act on state it
+      generated itself earlier in the episode.
+    inclusion_test: >
+      Tag this if a single scored episode contains at least ~10 dependent actions AND failure at
+      an intermediate step makes the final score unattainable.
+    exclusion_test: >
+      Do NOT tag this if the benchmark is scored per-item on independent items, however many
+      items there are, or if the long sequence is produced in one generation without any
+      environment feedback between steps.
+    examples:
+      - ref: osworld-2-0
+        qualifies: true
+        why: >
+          A single GUI task runs for dozens of interdependent actions against live application
+          state; an early misclick is unrecoverable.
+      - ref: tau2-bench
+        qualifies: true
+        why: >
+          Multi-turn tool-and-user interaction under a domain policy; the pass^k metric exists
+          precisely because execution reliability over the whole episode is what is measured.
+      - ref: humanitys-last-exam
+        qualifies: false
+        why: >
+          NEAR MISS. Answers can be very long and involve extended chains of reasoning, but each
+          question is scored independently and there is no environment state. Long output is not
+          long horizon.
+      - ref: mmlu-pro
+        qualifies: false
+        why: >
+          NEAR MISS. Thousands of items, but they are independent multiple-choice questions.
+          Benchmark size is not episode length.
+    see_also: [planning, memory-retention, autonomy]
+    not_to_be_confused_with:
+      - term: planning
+        distinction: >
+          `planning` is about producing a correct sequence before or during acting;
+          `long-horizon-execution` is about surviving the sequence.
+      - term: memory-retention
+        distinction: >
+          `memory-retention` concerns information carried across episodes or across a long
+          context; `long-horizon-execution` concerns state generated within one episode.
+
   - id: search-exploration
     label: Search and exploration
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Covering a space of options efficiently enough to find a good one.
+    inclusion_test: >
+      Tag this if the benchmark rewards how the option space was traversed -- coverage, sample
+      count, or discovery under a budget.
+    exclusion_test: >
+      Do NOT tag this if the space is small enough to enumerate, and do NOT tag it where the
+      score is the quality of a single produced solution with no search budget at stake.
+    examples:
+      - ref: matbench-discovery
+        qualifies: true
+        why: >
+          Stability screening over a 256k-structure test set is a search problem under a
+          screening budget.
+      - ref: craftax
+        qualifies: true
+        why: >
+          Open-ended achievement discovery rewards exploration directly.
+      - ref: frontiermath
+        qualifies: false
+        why: >
+          NEAR MISS. Hard problems requiring exploratory work, but nothing about the traversal
+          is scored -- only the final value.
+    see_also: [planning, optimization]
+
   - id: optimization
     label: Optimization
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Finding the input that best satisfies an objective function, where the score is the
+      objective's value.
+    inclusion_test: >
+      Tag this if the benchmark states an objective and ranks systems by how well they optimise
+      it.
+    exclusion_test: >
+      Do NOT tag this if the objective is accuracy against a held-out key, and do NOT tag it
+      where the difficulty is finding any feasible solution rather than the best one.
+    examples:
+      - ref: smart-buildings-challenge
+        qualifies: true
+        why: >
+          Real-world building energy optimisation scored as a control objective.
+      - ref: open-catalyst
+        qualifies: true
+        why: >
+          Ranks systems by the quality of the energies and forces they predict for catalyst
+          search.
+      - ref: posebusters
+        qualifies: false
+        why: >
+          NEAR MISS. Poses are scored, but on validity checks rather than on an objective being
+          minimised.
+    see_also: [search-exploration, quantitative-reasoning]
+
   - id: experimental-design
     label: Experimental design
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Designing the procedure or apparatus that would discriminate between competing
+      possibilities.
+    inclusion_test: >
+      Tag this if the scored artifact is a protocol, assay or apparatus, judged by whether it
+      would answer the question.
+    exclusion_test: >
+      Do NOT tag this if the protocol is given and only executed, and do NOT tag it where the
+      output is a hypothesis rather than the means of testing one.
+    examples:
+      - ref: autolabs
+        qualifies: true
+        why: >
+          Natural language is converted to an executable liquid-handler protocol, scored against
+          expert procedures.
+      - ref: learn2design-2026
+        qualifies: true
+        why: >
+          Optimises the experimental design of a detector, which is the scored object itself.
+      - ref: bixbench
+        qualifies: false
+        why: >
+          NEAR MISS. Multi-step research work, but the analysis path is applied to supplied data
+          rather than designed to discriminate between hypotheses.
+    see_also: [hypothesis-generation, causal-reasoning]
+    not_to_be_confused_with:
+      - term: hypothesis-generation
+        distinction: >
+          One proposes what might be true, the other proposes how to find out.
+
   - id: hypothesis-generation
     label: Hypothesis generation
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Producing candidate explanations or proposals worth testing, scored on the candidates
+      rather than on a single answer.
+    inclusion_test: >
+      Tag this if the system's output is a set or ranking of candidates and the benchmark scores
+      that set.
+    exclusion_test: >
+      Do NOT tag this if exactly one answer is scored, and do NOT tag it where the candidates
+      are supplied and only selection is required.
+    examples:
+      - ref: cache
+        qualifies: true
+        why: >
+          Participants nominate up to 100 compounds, which organisers then buy and assay; the
+          nomination set is the scored output.
+      - ref: learn2design-2026
+        qualifies: true
+        why: >
+          Scores proposed experimental designs for gravitational-wave detectors rather than a
+          single derived value.
+      - ref: frontiermath
+        qualifies: false
+        why: >
+          NEAR MISS. Research-level difficulty, but exactly one answer per problem is checked,
+          so nothing about candidate generation is measured.
+    see_also: [experimental-design, abductive-reasoning, creativity-novelty]
+
   - id: generation-fidelity
     label: Generation fidelity
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      How closely generated output matches a reference or a stated specification.
+    inclusion_test: >
+      Tag this if the score compares the produced artifact against a target by similarity,
+      distance or human preference for faithfulness.
+    exclusion_test: >
+      Do NOT tag this if the output is judged for being new rather than for matching, and do NOT
+      tag it where a single discrete answer is checked against a key.
+    examples:
+      - ref: ntire
+        qualifies: true
+        why: >
+          Restoration and enhancement tracks scored by fidelity to a reference image.
+      - ref: cadeval
+        qualifies: true
+        why: >
+          Generated OpenSCAD geometry scored by Chamfer and Hausdorff tolerance against the
+          target solid.
+      - ref: arc-agi
+        qualifies: false
+        why: >
+          NEAR MISS. Output grids are compared to a target, but exactly and discretely; this is
+          correctness, not fidelity along a continuum.
+    see_also: [creativity-novelty, perception]
+    not_to_be_confused_with:
+      - term: creativity-novelty
+        distinction: >
+          Fidelity rewards matching the reference; novelty rewards departing from it usefully. A
+          benchmark cannot maximise both.
+
   - id: creativity-novelty
     label: Creativity and novelty
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Producing output that is both new and useful, where resemblance to existing work counts
+      against it.
+    inclusion_test: >
+      Tag this if the scoring rewards departure from known solutions, or explicitly penalises
+      retrieval and reproduction.
+    exclusion_test: >
+      Do NOT tag this if novelty is incidental to a fidelity score, and do NOT tag it where
+      variety is measured without any usefulness criterion.
+    examples:
+      - ref: cache
+        qualifies: true
+        why: >
+          Prospective hit-finding rewards compounds nobody has assayed; a known binder earns
+          nothing.
+      - ref: craftax
+        qualifies: true
+        why: >
+          Open-ended achievement discovery rewards reaching states no policy was shown.
+      - ref: ntire
+        qualifies: false
+        why: >
+          NEAR MISS. Generative restoration methods, but the score is fidelity to a reference,
+          which is the opposite criterion.
+    see_also: [generation-fidelity, hypothesis-generation]
+
   - id: instruction-following
     label: Instruction following
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Complying with directions given in the prompt, where compliance is checkable independently
+      of whether the content is good.
+    inclusion_test: >
+      Tag this if the benchmark scores whether stated directions were obeyed, and per 02 S4.2
+      the benchmark's own source claims instruction following.
+    exclusion_test: >
+      Do NOT tag this if the requirements are physical or policy conditions the source calls
+      validity or compliance, and do NOT tag it where only answer correctness is scored.
+    examples:
+      - ref: ifeval
+        qualifies: true
+        why: >
+          Verifiable per-instruction constraints, and the source claims instruction following.
+      - ref: healthbench
+        qualifies: true
+        why: >
+          Rubric criteria include whether the response did what was asked, separately from
+          clinical correctness.
+      - ref: posebusters
+        qualifies: false
+        why: >
+          NEAR MISS. A battery of conditions every output must satisfy, but the source claims
+          physical validity, so 02 S4.2's tie-break assigns `constraint-satisfaction`.
+    see_also: [constraint-satisfaction]
+    not_to_be_confused_with:
+      - term: constraint-satisfaction
+        distinction: >
+          Both columns are dense, so drift moves mass without destroying a gap claim, but
+          per-term F1 for both must be watched in the first inter-rater run (02 S4.2).
+
   - id: constraint-satisfaction
     label: Constraint satisfaction
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Producing an output that satisfies every stated requirement simultaneously, where a
+      violation of any one makes the output wrong.
+    inclusion_test: >
+      Tag this if the scoring function checks the output against an enumerated set of conditions
+      and any single violation fails the item. Per 02 S4.2's tie-break, tag the term the
+      benchmark's own source claims.
+    exclusion_test: >
+      Do NOT tag this if the requirements are stylistic preferences scored by degree, and do NOT
+      tag it where the conditions are given as natural-language instructions the benchmark
+      itself calls instruction following.
+    examples:
+      - ref: posebusters
+        qualifies: true
+        why: >
+          A physical-validity battery in which any failed check invalidates the predicted pose;
+          the benchmark claims validity, not instruction compliance.
+      - ref: tau2-bench
+        qualifies: true
+        why: >
+          Policy compliance is scored as a hard condition on the episode, which is what its
+          source claims.
+      - ref: ifeval
+        qualifies: false
+        why: >
+          NEAR MISS. Verifiable per-instruction constraints, but the source claims instruction
+          following, and 02 S4.2 makes the source's own claim the tie-break.
+    see_also: [instruction-following, deductive-reasoning]
+    not_to_be_confused_with:
+      - term: instruction-following
+        distinction: >
+          The seam crosses two capability groups and both columns are dense. The tie-break is 02
+          S11 rule 2: tag what the benchmark's own source claims. IFEval claims
+          instruction-following; PoseBusters and tau2-bench claim constraint satisfaction.
+
   - id: tool-use
     label: Tool use
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Invoking external tools or APIs and using what they return.
+    inclusion_test: >
+      Tag this if the protocol exposes callable tools and the score depends on whether they were
+      selected, parameterised and consumed correctly.
+    exclusion_test: >
+      Do NOT tag this if tools are available but incidental to the score, and do NOT tag it
+      where the system emits a call that is never executed.
+    examples:
+      - ref: tau2-bench
+        qualifies: true
+        why: >
+          Multi-turn tool-and-user interaction against a domain policy; the calls are executed
+          and their results matter.
+      - ref: medagentbench-v2
+        qualifies: true
+        why: >
+          300 physician-written tasks against a live FHIR EHR with 700,000+ data elements.
+      - ref: humanitys-last-exam
+        qualifies: false
+        why: >
+          NEAR MISS. Frequently run with tools enabled, but the benchmark's scored quantity is
+          the answer, and tool availability is a harness choice rather than the subject.
+    see_also: [long-horizon-execution, sensorimotor-control]
+
   - id: memory-retention
     label: Memory retention
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Carrying information across a long context or across episode boundaries so that it is
+      still available when it is needed.
+    inclusion_test: >
+      Tag this if the scored behaviour depends on information introduced earlier and separated
+      from its use by intervening material or by an episode boundary.
+    exclusion_test: >
+      Do NOT tag this if the needed information sits adjacent to its use, and do NOT tag it
+      merely because the input is long -- length is a property of the prompt, not evidence that
+      anything had to be retained.
+    examples:
+      - ref: tau2-bench
+        qualifies: true
+        why: >
+          Multi-turn interaction under a domain policy stated once at the start and scored many
+          turns later.
+      - ref: agentclinic
+        qualifies: true
+        why: >
+          A stateful clinical episode in which findings gathered early determine whether later
+          actions are correct.
+      - ref: humanitys-last-exam
+        qualifies: false
+        why: >
+          NEAR MISS. Answers can run very long, but each of the questions is scored
+          independently and nothing has to survive from one to the next. Long output is not
+          retention.
+    see_also: [context-integration, long-horizon-execution]
+    not_to_be_confused_with:
+      - term: context-integration
+        distinction: >
+          `context-integration` is using what is in the window; `memory-retention` is still
+          having it after distance or an episode boundary.
+
   - id: context-integration
     label: Context integration
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Using information the protocol supplies in the prompt or environment, rather than
+      information the system already held.
+    inclusion_test: >
+      Tag this if the benchmark supplies the material that determines the answer and scores
+      whether the system used it correctly.
+    exclusion_test: >
+      Do NOT tag this if the supplied material is decorative and the answer is obtainable
+      without it, and do NOT tag it for closed-book questions however much context surrounds
+      them.
+    examples:
+      - ref: bixbench
+        qualifies: true
+        why: >
+          53 analysis scenarios in which the supplied notebook and data determine the correct
+          result.
+      - ref: lab-bench
+        qualifies: true
+        why: >
+          Practical research questions answered against supplied figures, protocols and database
+          records.
+      - ref: simplebench
+        qualifies: false
+        why: >
+          NEAR MISS. Short prompts with a lot of implicit setup, but nothing is supplied that
+          the answer depends on; the reasoning is over what the system already holds.
+    see_also: [knowledge-recall, memory-retention]
+    not_to_be_confused_with:
+      - term: knowledge-recall
+        distinction: >
+          The discriminant is whether the protocol supplies the source. If it does, this term;
+          if it does not, `knowledge-recall`.
+
   - id: sample-efficiency
     label: Sample efficiency
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Reaching a given level of competence from a small number of examples or interactions.
+    inclusion_test: >
+      Tag this if the benchmark fixes a budget of samples, episodes or environment steps and
+      scores performance at that budget.
+    exclusion_test: >
+      Do NOT tag this if the budget is unconstrained, and do NOT tag it where few-shot prompting
+      is a harness setting rather than the measured quantity.
+    examples:
+      - ref: atari-100k
+        qualifies: true
+        why: >
+          The 100k-step budget is the benchmark; performance at that budget is the entire claim.
+      - ref: proteingym
+        qualifies: true
+        why: >
+          Low-shot regimes are a scored condition across deep mutational scanning assays.
+      - ref: mmlu-pro
+        qualifies: false
+        why: >
+          NEAR MISS. Often reported few-shot, but the shot count is a harness choice and the
+          benchmark constrains no budget.
+    see_also: [continual-learning, transfer-learning]
+
   - id: continual-learning
     label: Continual learning
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Acquiring new competence over time without losing what was already learned.
+    inclusion_test: >
+      Tag this if the protocol presents tasks in sequence and scores retention of earlier ones
+      alongside acquisition of later ones.
+    exclusion_test: >
+      Do NOT tag this if all tasks are available at once, and do NOT tag it where only final
+      performance is reported.
+    examples:
+      - ref: open-x-embodiment
+        qualifies: true
+        why: >
+          Competence is accumulated across embodiments and datasets, with retention across them
+          at stake.
+      - ref: craftax
+        qualifies: true
+        why: >
+          Progression through an achievement tree requires keeping earlier skills while
+          acquiring later ones.
+      - ref: atari-100k
+        qualifies: false
+        why: >
+          NEAR MISS. Learning under a budget, but each game is trained and scored independently,
+          so nothing can be forgotten.
+    see_also: [sample-efficiency, transfer-learning]
+
   - id: distribution-shift-generalization
     label: Distribution-shift generalization
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Holding up when the input distribution changes from the one the system was fitted to.
+    inclusion_test: >
+      Tag this if the benchmark evaluates on inputs drawn from a deliberately different
+      distribution and reports the degradation.
+    exclusion_test: >
+      Do NOT tag this if the change is adversarially constructed, and do NOT tag it where the
+      task itself changes rather than the inputs.
+    examples:
+      - ref: geo-bench-2
+        qualifies: true
+        why: >
+          Held-out regions and sensors constitute a deliberate distributional move.
+      - ref: birdclef-plus
+        qualifies: true
+        why: >
+          Soundscapes from unseen recording conditions move the distribution while the
+          classification task is unchanged.
+      - ref: procgen
+        qualifies: false
+        why: >
+          NEAR MISS. Unseen levels, but constructed by recombining a fixed primitive set, which
+          02 S4.2 assigns to `compositional-generalization`.
+    see_also: [adversarial-robustness, transfer-learning, compositional-generalization]
+    not_to_be_confused_with:
+      - term: adversarial-robustness
+        distinction: >
+          Shift is naturally occurring or by design; adversarial robustness concerns an attacker
+          choosing the worst case.
+
   - id: compositional-generalization
     label: Compositional generalization
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
     # homograph with a subdomain leaf; declared in homographs.yaml (9d)
+    definition: >
+      Recombining known primitives in arrangements that were never observed together.
+    inclusion_test: >
+      Tag this if every primitive in the held-out items appeared in training or in the prompt,
+      and only their arrangement is new.
+    exclusion_test: >
+      Do NOT tag this if the held-out items introduce new primitives, and do NOT tag it for
+      ordinary distribution shift where the change is in input statistics rather than in
+      structure.
+    examples:
+      - ref: procgen
+        qualifies: true
+        why: >
+          Procedurally generated levels recombine a fixed primitive set into unseen
+          arrangements.
+      - ref: craftax
+        qualifies: true
+        why: >
+          Same shape, with an explicitly compositional achievement tree.
+      - ref: arc-agi
+        qualifies: false
+        why: >
+          NEAR MISS. Held-out tasks are genuinely novel, but they are novel in representation
+          rather than in the arrangement of a known primitive set.
+    see_also: [abstraction, distribution-shift-generalization]
+    not_to_be_confused_with:
+      - term: distribution-shift-generalization
+        distinction: >
+          Shift changes the input statistics; compositional generalization holds the primitives
+          fixed and changes only how they are put together.
+
   - id: transfer-learning
     label: Transfer learning
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Carrying competence acquired on one task or distribution to a different one.
+    inclusion_test: >
+      Tag this if the benchmark trains or validates on one setting and scores on a deliberately
+      different one, and the transfer itself is reported.
+    exclusion_test: >
+      Do NOT tag this if train and test differ only by sampling, and do NOT tag it where the
+      change is degradation under perturbation rather than a move to a new task.
+    examples:
+      - ref: simplerenv
+        qualifies: true
+        why: >
+          Built so simulated outcomes correlate with real-robot outcomes; the transfer is the
+          reported quantity.
+      - ref: open-x-embodiment
+        qualifies: true
+        why: >
+          Cross-embodiment transfer is the stated object of study.
+      - ref: procgen
+        qualifies: false
+        why: >
+          NEAR MISS. Held-out levels differ from training levels, but within one task and one
+          primitive set, which is `compositional-generalization`.
+    see_also: [sample-efficiency, distribution-shift-generalization]
+
   - id: adversarial-robustness
     label: Adversarial robustness
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Holding up against inputs chosen deliberately to make the system fail.
+    inclusion_test: >
+      Tag this if an attacker -- human, automated or red-team -- selects the inputs and the
+      score is the system's resistance.
+    exclusion_test: >
+      Do NOT tag this if the difficult inputs are naturally occurring, and do NOT tag it where
+      the failure sought is inconsistency across identical repeated trials.
+    examples:
+      - ref: inspect-evals
+        qualifies: true
+        why: >
+          Implements jailbreak-robustness and prompt-injection evaluations with adversarially
+          chosen inputs.
+      - ref: helm-safety
+        qualifies: true
+        why: >
+          Scores resistance under adversarial prompting as a distinct condition.
+      - ref: geo-bench-2
+        qualifies: false
+        why: >
+          NEAR MISS. Hard held-out conditions, but they occur naturally rather than being
+          selected to defeat the system.
+    see_also: [distribution-shift-generalization, harm-avoidance, reliability-consistency]
+
   - id: calibration-uncertainty
     label: Calibration and uncertainty
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    source: helm
+    definition: >
+      The ability to report how likely its own output is to be correct, such that the reported
+      confidence matches the observed frequency of correctness.
+    inclusion_test: >
+      Tag this if the benchmark's scoring function consumes a confidence, a probability, a
+      distribution or an interval emitted by the system under test.
+    exclusion_test: >
+      Do NOT tag this merely because accuracy is measured on hard items, and do NOT tag it when
+      a third party computes calibration post hoc from logits the system did not intend as a
+      confidence claim.
+    examples:
+      - ref: fair-universe-higgsml-uncertainty
+        qualifies: true
+        why: >
+          Participants must emit confidence intervals on Higgs signal strength under systematic
+          nuisance parameters; the metric is interval coverage and width, not accuracy.
+      - ref: humanitys-last-exam
+        qualifies: true
+        why: >
+          HLE reports calibration error alongside accuracy as a first-class published number.
+      - ref: gpqa-diamond
+        qualifies: false
+        why: >
+          NEAR MISS. Graduate-level difficulty and a known chance baseline, but the score is
+          plain accuracy; no confidence is elicited or scored.
+    see_also: [probabilistic-forecasting, honesty]
+    not_to_be_confused_with:
+      - term: probabilistic-forecasting
+        distinction: >
+          A well-calibrated system is not necessarily a good forecaster and vice versa (02
+          S4.2).
+
   - id: probabilistic-forecasting
     label: Probabilistic forecasting
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Producing a probability for a future event whose truth value does not yet exist.
+    inclusion_test: >
+      Tag this if the benchmark scores probabilities against outcomes that resolve after the
+      prediction is made.
+    exclusion_test: >
+      Do NOT tag this if the answer already exists and is merely withheld, and do NOT tag it
+      where the probability concerns the system's own correctness.
+    examples:
+      - ref: forecastbench
+        qualifies: true
+        why: >
+          Brier scores against questions that resolve in the future.
+      - ref: metaculus-futureeval
+        qualifies: true
+        why: >
+          Forecasts scored on resolution, against a standing human field.
+      - ref: fair-universe-higgsml-uncertainty
+        qualifies: false
+        why: >
+          NEAR MISS. Genuinely probabilistic, but the quantity is a physical parameter whose
+          truth exists now; that is `calibration-uncertainty`.
+    see_also: [calibration-uncertainty]
+
   - id: reliability-consistency
     label: Reliability and consistency
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Succeeding on the same task across repeated independent trials.
+    inclusion_test: >
+      Tag this if the benchmark runs the same item more than once and scores agreement across
+      runs -- pass^k and its relatives.
+    exclusion_test: >
+      Do NOT tag this if repeated runs are averaged, because averaging destroys exactly the
+      quantity this term names, and do NOT tag it where the inputs change between trials.
+    examples:
+      - ref: tau2-bench
+        qualifies: true
+        why: >
+          pass^k is the fraction of tasks solved in ALL k trials; it is the canonical case.
+      - ref: carla-leaderboard-2-0
+        qualifies: true
+        why: >
+          Route completion across repeated runs on secret routes exposes run-to-run variance
+          directly.
+      - ref: humanitys-last-exam
+        qualifies: false
+        why: >
+          NEAR MISS. Reported with variance, but the headline metric averages across attempts,
+          which is the operation this term exists to distinguish from.
+    see_also: [adversarial-robustness, distribution-shift-generalization]
+    not_to_be_confused_with:
+      - term: adversarial-robustness
+        distinction: >
+          Distinct from holding up under attack and from holding up under changed inputs; here
+          the task is identical and only the trial differs (02 S4.2).
+
   - id: self-correction
     label: Self correction
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Detecting an error in the system's own output and repairing it.
+    inclusion_test: >
+      Tag this if the protocol gives the system a chance to revise and scores the improvement,
+      or scores whether errors were caught.
+    exclusion_test: >
+      Do NOT tag this if revision is driven by an external oracle telling it what is wrong, and
+      do NOT tag it where only the final answer after unlimited attempts is scored.
+    examples:
+      - ref: swe-bench-verified
+        qualifies: true
+        why: >
+          Agentic scaffolds run tests, read failures and repair their own patches within the
+          episode.
+      - ref: terminal-bench
+        qualifies: true
+        why: >
+          Command failures are observable to the agent and recovery within the episode is what
+          separates runs.
+      - ref: frontiermath
+        qualifies: false
+        why: >
+          NEAR MISS. Extended working with ample scope for internal checking, but only the
+          submitted value is scored and no revision loop is observed.
+    see_also: [reliability-consistency, long-horizon-execution]
+
   - id: collaboration
     label: Collaboration
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Working with another agent or a human towards a shared objective, where the joint outcome
+      is scored.
+    inclusion_test: >
+      Tag this if the protocol contains more than one actor and the score depends on the outcome
+      they reach together.
+    exclusion_test: >
+      Do NOT tag this if the other party is a scripted environment with no objective, and do NOT
+      tag it for adversarial settings where the objectives are opposed.
+    examples:
+      - ref: tau2-bench
+        qualifies: true
+        why: >
+          A simulated user is a participant whose satisfaction forms part of the scored outcome.
+      - ref: agentclinic
+        qualifies: true
+        why: >
+          A clinical episode conducted with a simulated patient whose cooperation shapes what
+          can be learned.
+      - ref: kaggle-game-arena
+        qualifies: false
+        why: >
+          NEAR MISS. Multiple agents, but their objectives are opposed; this is competition, not
+          collaboration.
+    see_also: [communication, honesty]
+
   - id: communication
     label: Communication
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Conveying information to another party such that it is correctly received and acted on.
+    inclusion_test: >
+      Tag this if the score depends on what the recipient understood or did, not on properties
+      of the message alone.
+    exclusion_test: >
+      Do NOT tag this if the output is scored against a reference text, and do NOT tag it where
+      the joint objective rather than the transfer is what is measured.
+    examples:
+      - ref: healthbench
+        qualifies: true
+        why: >
+          Physician-authored rubrics score whether the reply communicates to the patient, not
+          only whether it is correct.
+      - ref: rexrank
+        qualifies: true
+        why: >
+          A radiology report succeeds when a clinician can act on it; the eight metrics probe
+          that rather than string overlap.
+      - ref: open-asr-leaderboard
+        qualifies: false
+        why: >
+          NEAR MISS. Squarely about language, but word error rate scores transcription accuracy,
+          with no recipient whose understanding is measured.
+    see_also: [collaboration, generation-fidelity]
+
   - id: situational-awareness
     label: Situational awareness
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Recognising that it is being evaluated, and altering behaviour accordingly.
+    inclusion_test: >
+      Tag this if the benchmark tests evaluation awareness or sandbagging -- whether the system
+      behaves differently when it believes it is observed.
+    exclusion_test: >
+      Do NOT tag this under the plain-English reading of the slug: this term does NOT mean an
+      agent's awareness of its own task state, which is `context-integration`.
+    examples:
+      - ref: inspect-evals
+        qualifies: true
+        why: >
+          Implements evaluation-awareness and sandbagging evaluations directly.
+      - ref: helm-safety
+        qualifies: true
+        why: >
+          Carries deception and scheming probes in which behaviour under observation is the
+          measured quantity.
+      - ref: osworld-2-0
+        qualifies: false
+        why: >
+          NEAR MISS. Demands continuous awareness of application state, which is exactly the
+          plain-English reading this definition excludes.
+    see_also: [honesty, context-integration]
+    not_to_be_confused_with:
+      - term: context-integration
+        distinction: >
+          The plain-English reading of this slug points at context-integration, so a curator who
+          has not read the definition mis-tags it into the frontier-risk column -- the one that
+          attracts the most external scrutiny. 02 S4.2 requires this slug be renamed by ADR
+          before the v1.0.0 freeze (D1 risk 10).
+
   - id: honesty
     label: Honesty
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Asserting what the system's own evidence supports, including admitting ignorance when it
+      has none.
+    inclusion_test: >
+      Tag this if the benchmark scores truthfulness of assertion separately from correctness --
+      for example rewarding an admission of not knowing.
+    exclusion_test: >
+      Do NOT tag this if being wrong is the only failure mode measured, and do NOT tag it where
+      the assertion is a numeric confidence.
+    examples:
+      - ref: inspect-evals
+        qualifies: true
+        why: >
+          Implements honesty and truthfulness evaluations in which confident fabrication scores
+          worse than abstention.
+      - ref: healthbench
+        qualifies: true
+        why: >
+          Rubric criteria penalise unsupported clinical assertions distinctly from incorrect
+          ones.
+      - ref: gpqa-diamond
+        qualifies: false
+        why: >
+          NEAR MISS. Hard questions where fabrication is common, but scoring is plain accuracy;
+          abstaining and being wrong are indistinguishable.
+    see_also: [factual-precision, calibration-uncertainty]
+    not_to_be_confused_with:
+      - term: calibration-uncertainty
+        distinction: >
+          `calibration-uncertainty` scores a stated numeric confidence against observed
+          accuracy; `honesty` scores whether the assertion itself is made in good faith.
+
   - id: harm-avoidance
     label: Harm avoidance
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Declining to produce or perform actions the benchmark defines as harmful.
+    inclusion_test: >
+      Tag this if the scored behaviour is refusal, safe completion, or the absence of a harmful
+      action.
+    exclusion_test: >
+      Do NOT tag this if the benchmark measures resistance to an attacker rather than conduct
+      under ordinary use, and do NOT tag it where harm is discussed rather than elicited.
+    examples:
+      - ref: helm-safety
+        qualifies: true
+        why: >
+          Scores harmless completion across a defined harm taxonomy.
+      - ref: inspect-evals
+        qualifies: true
+        why: >
+          Carries refusal and agentic-harm evaluations in which the absence of the harmful
+          action is the score.
+      - ref: humanitys-last-exam
+        qualifies: false
+        why: >
+          NEAR MISS. Includes hazardous subject matter, but nothing about refusal or harmful
+          action is scored.
+    see_also: [adversarial-robustness, honesty]
+    not_to_be_confused_with:
+      - term: adversarial-robustness
+        distinction: >
+          Harm avoidance is conduct under ordinary use; holding up against a deliberate attacker
+          is `adversarial-robustness`.
+
   - id: autonomy
     label: Autonomy
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Operating over an extended task without human intervention.
+    inclusion_test: >
+      Tag this if the protocol prohibits or measures human intervention and scores what was
+      achieved unattended.
+    exclusion_test: >
+      Do NOT tag this if a human is in the loop by design, and do NOT tag it merely because an
+      episode is long.
+    examples:
+      - ref: gdpval
+        qualifies: true
+        why: >
+          1,320 tasks across 44 occupations completed end to end and graded blind against expert
+          deliverables.
+      - ref: remote-labor-index
+        qualifies: true
+        why: >
+          Scores whether remote work was completed unattended, which is the index's whole
+          construction.
+      - ref: tau2-bench
+        qualifies: false
+        why: >
+          NEAR MISS. Long multi-turn episodes, but a simulated user participates throughout by
+          design, so the work is not unattended.
+    see_also: [long-horizon-execution, self-improvement]
+
   - id: self-improvement
     label: Self improvement
-    status: proposed
+    status: active
     introduced_in: 1.0.0
-    definition: ""
+    definition: >
+      Improving the system's own capability through its own activity, without external
+      retraining.
+    inclusion_test: >
+      Tag this if the benchmark measures capability before and after a period of the system's
+      own work and attributes the change to that work.
+    exclusion_test: >
+      Do NOT tag this if improvement comes from supplied training data, and do NOT tag it where
+      the gain is within a single episode rather than in the system's standing capability.
+    examples:
+      - ref: craftax
+        qualifies: true
+        why: >
+          Open-ended progression in which the agent's own discoveries raise what it can
+          subsequently achieve.
+      - ref: swe-bench-verified
+        qualifies: false
+        why: >
+          NEAR MISS. Agents improve a codebase across an episode, but their own standing
+          capability is exactly what it was when the episode ends.
+      - ref: atari-100k
+        qualifies: false
+        why: >
+          NEAR MISS. Capability rises during the budget, but the driver is ordinary supplied
+          experience under a fixed algorithm, not the system acting on itself.
+    see_also: [autonomy, continual-learning]
+
