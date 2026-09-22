@@ -1,0 +1,88 @@
+# taxonomy/domain_groups.yaml
+#
+# Presentation groups over the 19 domain families. Settled by D4 and enumerated in
+# 09-design-system.md §4.2, which is the canonical source.
+#
+# THE ROLL-UP'S JOB IS ORDERING AND BANDING, NOT COLOUR. It fixes the row order of the
+# coverage matrix, the containment structure of the packed Atlas and the page order of the
+# Saturation Wall, and nothing else. Declared order below IS the render order, top to bottom
+# and outside-in: formal -> general reasoning -> perception -> physical -> life -> society,
+# running roughly from the most abstract substrate to the most embedded-in-the-world. Row
+# order never comes from entry count and never alphabetically; sorting by entry count is a
+# user-invoked, URL-encoded option, never the default.
+#
+# display_only: true. Four properties are enforced (09 §4.2):
+#   1. Total partition -- every family in domains.yaml in exactly one group, and no member
+#      that is not a family, so adding a 20th family without assigning it a group fails CI
+#      in the same commit.
+#   2. No filter key -- the URL grammar has no key for it; adding one requires an ADR
+#      superseding D4.
+#   3. Not in analytics -- permitted in build/atlas.json as a derived display field and in
+#      rendered HTML, forbidden in facets.json, corpus.json, derived/coverage.json,
+#      derived/gaps.json, derived/ecosystem.json, the exported suite.yaml and the Croissant
+#      JSON-LD. Every coverage percentage, density figure, gap score and curation-confidence
+#      value is computed over families and subdomains, never over groups.
+#   4. Never in a claim sentence -- no rendered sentence of the form "N benchmarks measure X
+#      in Life and health sciences".
+#
+# Properties 1 and 3 are mechanically checked by scripts/check_display_only_vocab.py (CI 9h).
+# Property 2 is a URL-grammar rule and property 4 is a review rule.
+#
+# A display-only grouping that leaks into a published gap claim is a data-integrity failure
+# invisible in the diff: a specialist who disputes the grouping has then invalidated the
+# finding without touching the data. That is why this is a real vocabulary under ADR
+# governance rather than a constant in a design file -- the arrangement that let an 18-row
+# palette table outlive a 19-family taxonomy, because nothing failed when engineering-design
+# was added.
+
+version: 0.1.0
+updated: 2026-09-22
+display_only: true
+description: >
+  Six presentation groups over the nineteen domain families. Ordering and banding only:
+  never a filter key, never an axis of a published number, never the subject of a claim
+  sentence.
+
+groups:
+  - id: symbolic-formal
+    label: Symbolic and formal
+    members:
+      - language
+      - mathematics
+      - code
+
+  - id: reasoning-general-ability
+    label: Reasoning and general ability
+    members:
+      - reasoning-general
+      - general-intelligence
+      - games-planning
+
+  - id: perception-generation
+    label: Perception and generation
+    members:
+      - vision
+      - audio-speech
+      - multimodal
+
+  - id: physical-engineered
+    label: Physical and engineered systems
+    members:
+      - robotics-embodiment
+      - physics
+      - engineering-design
+      - earth-climate
+
+  - id: life-health
+    label: Life and health sciences
+    members:
+      - chemistry-materials
+      - biology-genetics
+      - medicine-health
+
+  - id: society-safety
+    label: Society and safety
+    members:
+      - agents-tooluse
+      - safety-alignment
+      - society-econ-law

@@ -18,6 +18,9 @@ facet: capability_group
 facet_kind: flat
 version: 0.1.0
 updated: 2026-09-22
+# false, unlike domain_groups.yaml: these group ids ARE the coarse grid's column
+# axis and appear legitimately in derived/coverage.json. 04 S16 GroupFile.
+display_only: false
 description: >
   The thirteen coarse capability groups that form the column axis of the published coverage
   matrix. Derived, never hand-tagged: curators tag capability terms and the rollup is
