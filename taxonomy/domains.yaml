@@ -595,7 +595,7 @@ terms:
     seed_target: 20
     core: true
     coverage_status: surveyed
-    curation_posture: hand-curate
+    curation_posture: mixed
     reviewer_signoff: none
   - id: medicine-health/clinical-qa
     label: Clinical QA
