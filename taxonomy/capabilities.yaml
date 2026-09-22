@@ -1,0 +1,18 @@
+# taxonomy/capabilities.yaml
+#
+# Facet 2 of 8. Scaffolded empty by P0-S1-T01; terms are authored in P0-S1-T02 (domains)
+# and P0-S2 (all others). Header keys are fixed by the FacetFile schema in
+# _plan/04-data-model.md S16; `version` is the taxonomy version (03 S10), not the schema
+# version. `facet_kind` takes `navigational` or `flat` per that same schema.
+
+facet: capability
+facet_kind: flat
+version: 0.1.0
+updated: 2026-09-22
+description: >
+  The underlying ability a benchmark is designed to isolate, independent of the domain it is
+  situated in. Crossed with Domain, this facet produces the coverage matrix, which is why its
+  terms must stay stable, mutually distinguishable, and applied sparingly. A derived 13-group
+  rollup supplies the matrix columns and is never hand-tagged.
+
+terms: []

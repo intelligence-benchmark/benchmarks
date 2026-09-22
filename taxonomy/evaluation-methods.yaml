@@ -1,0 +1,17 @@
+# taxonomy/evaluation-methods.yaml
+#
+# Facet 3 of 8. Scaffolded empty by P0-S1-T01; terms are authored in P0-S1-T02 (domains)
+# and P0-S2 (all others). Header keys are fixed by the FacetFile schema in
+# _plan/04-data-model.md S16; `version` is the taxonomy version (03 S10), not the schema
+# version. `facet_kind` takes `navigational` or `flat` per that same schema.
+
+facet: evaluation_method
+facet_kind: flat
+version: 0.1.0
+updated: 2026-09-22
+description: >
+  How the benchmark arrives at a score: the scoring protocol rather than the subject matter.
+  Drives comparability warnings and trust badges, because two numbers produced by different
+  evaluation methods are frequently not comparable even on the same benchmark.
+
+terms: []
