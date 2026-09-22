@@ -197,6 +197,25 @@ def parse_02_s14(text):
 
 # ---------------------------------------------------------------- checks
 
+def check_9c_all_facets(r):
+    """9c applies within EVERY taxonomy/*.yaml, not just domains.yaml."""
+    bad = []
+    checked = 0
+    for name in FACET_FILES:
+        d = load_facet(name)
+        terms = (d or {}).get('terms') or []
+        if not terms:
+            continue
+        checked += 1
+        ids = [t['id'] for t in terms]
+        dupe = sorted(set(i for i in ids if ids.count(i) > 1))
+        if dupe:
+            bad.append('%s.yaml: %s' % (name, dupe))
+    if bad:
+        return r.fail('9c id uniqueness per file', '; '.join(bad))
+    r.ok('9c id uniqueness per file', '%d populated facet files, no duplicate id' % checked)
+
+
 def check_9c(r, fams, subs):
     ids = [t['id'] for t in fams + subs]
     dupe = sorted(set(i for i in ids if ids.count(i) > 1))
@@ -263,8 +282,14 @@ def check_9g(r):
     if not cap_ids:
         return r.pend('9g capability-group partition',
                       'capabilities.yaml has no terms yet; authored in P0-S2-T01')
+    # capability_groups.yaml is not a facet file: its records live under `groups`, not `terms`,
+    # because nothing in data/ references a group id and the rollup is derived, never tagged.
+    grecs = groups.get('groups') or []
+    if not grecs:
+        return r.fail('9g capability-group partition',
+                      'capability_groups.yaml has no `groups` list')
     seen, dupes, unknown = set(), [], []
-    for g in groups.get('terms') or []:
+    for g in grecs:
         for m in g.get('members') or []:
             if m in seen:
                 dupes.append(m)
@@ -279,7 +304,9 @@ def check_9g(r):
     uncovered = sorted(cap_ids - seen)
     if uncovered:
         problems.append('capabilities in no group: %s' % uncovered)
-    gids = set(g['id'] for g in groups.get('terms') or [])
+    gids = set(g['id'] for g in grecs)
+    if len(gids) != len(grecs):
+        problems.append('duplicate group id')
     fams, subs = domain_terms()
     collide = gids & (cap_ids | set(f['id'] for f in fams)
                       | set(s['id'].split('/')[-1] for s in subs))
@@ -371,6 +398,7 @@ def main():
     print('  documents %s\n' % (PLAN if doc02 else '(not in this tree)'))
 
     r = Result()
+    check_9c_all_facets(r)
     check_9c(r, fams, subs)
     check_9f(r, fams, posture_owner)
     check_9g(r)

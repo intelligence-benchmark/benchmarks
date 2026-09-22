@@ -15,4 +15,234 @@ description: >
   terms must stay stable, mutually distinguishable, and applied sparingly. A derived 13-group
   rollup supplies the matrix columns and is never hand-tagged.
 
-terms: []
+# The 44 ids and labels are laid down here by P0-S1-T04 so the partition in
+# capability_groups.yaml can be checked (9g). Each record is completed by P0-S2-T01,
+# which authors the definition, the inclusion and exclusion tests, the examples and
+# the per-term `source` attribution -- HELM is ancestry for this facet (02 S1), so a
+# blanket `source: own` here would be a false provenance claim.
+
+terms:
+  - id: knowledge-recall
+    label: Knowledge recall
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: factual-precision
+    label: Factual precision
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: deductive-reasoning
+    label: Deductive reasoning
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: inductive-reasoning
+    label: Inductive reasoning
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: abductive-reasoning
+    label: Abductive reasoning
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: causal-reasoning
+    label: Causal reasoning
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: analogical-reasoning
+    label: Analogical reasoning
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: abstraction
+    label: Abstraction
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: quantitative-reasoning
+    label: Quantitative reasoning
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: spatial-reasoning
+    label: Spatial reasoning
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+    # homograph with a subdomain leaf; declared in homographs.yaml (9d)
+  - id: temporal-reasoning
+    label: Temporal reasoning
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+    # homograph with a subdomain leaf; declared in homographs.yaml (9d)
+  - id: perception
+    label: Perception
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: sensorimotor-control
+    label: Sensorimotor control
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: grounding
+    label: Grounding
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: planning
+    label: Planning
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+    # homograph with a subdomain leaf; declared in homographs.yaml (9d)
+  - id: long-horizon-execution
+    label: Long-horizon execution
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: search-exploration
+    label: Search and exploration
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: optimization
+    label: Optimization
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: experimental-design
+    label: Experimental design
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: hypothesis-generation
+    label: Hypothesis generation
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: generation-fidelity
+    label: Generation fidelity
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: creativity-novelty
+    label: Creativity and novelty
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: instruction-following
+    label: Instruction following
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: constraint-satisfaction
+    label: Constraint satisfaction
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: tool-use
+    label: Tool use
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: memory-retention
+    label: Memory retention
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: context-integration
+    label: Context integration
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: sample-efficiency
+    label: Sample efficiency
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: continual-learning
+    label: Continual learning
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: distribution-shift-generalization
+    label: Distribution-shift generalization
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: compositional-generalization
+    label: Compositional generalization
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+    # homograph with a subdomain leaf; declared in homographs.yaml (9d)
+  - id: transfer-learning
+    label: Transfer learning
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: adversarial-robustness
+    label: Adversarial robustness
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: calibration-uncertainty
+    label: Calibration and uncertainty
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: probabilistic-forecasting
+    label: Probabilistic forecasting
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: reliability-consistency
+    label: Reliability and consistency
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: self-correction
+    label: Self correction
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: collaboration
+    label: Collaboration
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: communication
+    label: Communication
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: situational-awareness
+    label: Situational awareness
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: honesty
+    label: Honesty
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: harm-avoidance
+    label: Harm avoidance
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: autonomy
+    label: Autonomy
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""
+  - id: self-improvement
+    label: Self improvement
+    status: proposed
+    introduced_in: 1.0.0
+    definition: ""

@@ -1,0 +1,109 @@
+# taxonomy/capability_groups.yaml
+#
+# The coarse (column) axis of the coverage matrix: a strict partition of the 44 terms in
+# capabilities.yaml into 13 groups, settled by D1 and enumerated in 02 S4.3, which is the
+# canonical source. 19 domain families x 13 groups = 247 coarse cells, and the coarse grid
+# is the ONLY grid permitted to publish gap claims.
+#
+# This is not a facet file: it has no `terms` list, nothing in data/ ever references a group
+# id, and the rollup is computed at build time rather than hand-tagged.
+#
+# ADR REQUIRED (02 S11 rule 9). Moving a term between groups triggers no retro-tag pass and
+# changes no benchmark record, but it silently re-shapes every published gap claim in the
+# affected columns. That is why this file carries its own `version`, why that version is
+# recorded in build/derived/manifest.json and cited with every published coverage figure,
+# and why a regrouping is an ADR rather than an edit.
+
+facet: capability_group
+facet_kind: flat
+version: 0.1.0
+updated: 2026-09-22
+description: >
+  The thirteen coarse capability groups that form the column axis of the published coverage
+  matrix. Derived, never hand-tagged: curators tag capability terms and the rollup is
+  computed at build time.
+
+groups:
+  - id: knowledge-and-memory
+    label: Knowledge & memory
+    members:
+      - knowledge-recall
+      - factual-precision
+      - memory-retention
+      - context-integration
+  - id: formal-quantitative-reasoning
+    label: Formal & quantitative
+    members:
+      - deductive-reasoning
+      - quantitative-reasoning
+      - constraint-satisfaction
+  - id: abstraction-and-analogy
+    label: Abstraction & analogy
+    members:
+      - abstraction
+      - inductive-reasoning
+      - analogical-reasoning
+      - compositional-generalization
+  - id: causal-and-experimental-inference
+    label: Causal & experimental
+    members:
+      - abductive-reasoning
+      - causal-reasoning
+      - hypothesis-generation
+      - experimental-design
+  - id: perception-space-time
+    label: Signal, space & time
+    members:
+      - perception
+      - grounding
+      - spatial-reasoning
+      - temporal-reasoning
+  - id: planning-and-search
+    label: Planning & search
+    members:
+      - planning
+      - search-exploration
+      - optimization
+  - id: action-and-execution
+    label: Action & execution
+    members:
+      - sensorimotor-control
+      - tool-use
+      - long-horizon-execution
+  - id: controlled-generation
+    label: Controlled generation
+    members:
+      - generation-fidelity
+      - creativity-novelty
+      - instruction-following
+  - id: conduct-and-cooperation
+    label: Conduct & cooperation
+    members:
+      - collaboration
+      - communication
+      - honesty
+      - harm-avoidance
+  - id: learning-and-transfer
+    label: Learning & transfer
+    members:
+      - sample-efficiency
+      - continual-learning
+      - transfer-learning
+  - id: robustness-and-stability
+    label: Shift & robustness
+    members:
+      - distribution-shift-generalization
+      - adversarial-robustness
+      - reliability-consistency
+  - id: uncertainty-and-self-monitoring
+    label: Uncertainty handling
+    members:
+      - calibration-uncertainty
+      - probabilistic-forecasting
+      - self-correction
+  - id: autonomy-and-oversight
+    label: Autonomy & oversight
+    members:
+      - autonomy
+      - self-improvement
+      - situational-awareness
