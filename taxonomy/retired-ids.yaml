@@ -1,0 +1,41 @@
+# taxonomy/retired-ids.yaml
+#
+# The never-reuse ledger. An ID that has ever been published is never reassigned to a
+# different meaning.
+#
+# Reusing an ID is the one genuinely unrecoverable mistake available here (03 §9.2): an
+# external fork or a citation resolves the ID, and a silently-redefined ID turns someone
+# else's correct analysis into a wrong one with no diff to point at. Every other taxonomy
+# mistake can be corrected by an ADR and a migration; this one corrupts work we cannot see
+# and cannot notify.
+#
+# DEPRECATE VERSUS RETIRE (03 §9.2). A `deprecated` term stays in its facet file, stays
+# resolvable and renderable, cannot be assigned to new entries, and points at `deprecated_by`.
+# A `retired` term is REMOVED from its facet file and its id is appended here. Only the second
+# case lands in this ledger.
+#
+# Enforced by CI check 9 (ID-reuse), which fails any commit introducing a term id listed here.
+# This file is also one of two paths exempt from the forbidden-identifier grep (9a), because
+# it lists dead identifiers by construction -- a naive grep over taxonomy/ fails against it.
+#
+# Empty at creation. Nothing has been published, so nothing can have been retired: an entry
+# here before the first release would be a fiction.
+
+version: 0.1.0
+updated: 2026-09-22
+description: >
+  Term ids that have been published and then retired. Never reassigned to a different
+  meaning, in any facet, for any reason.
+
+# Entry shape, for the first real retirement:
+#
+#   - id: robotics-embodiment/manipulation
+#     facet: domain
+#     retired_in: 1.4.0          # taxonomy/VERSION at retirement
+#     retired_on: 2027-03-14
+#     adr: adr/0027-split-manipulation.md
+#     reason: >
+#       One sentence. What the term meant, and why it no longer names anything.
+#     superseded_by: [robotics-embodiment/tabletop-manipulation, ...]   # optional
+
+retired: []

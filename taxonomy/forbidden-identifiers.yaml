@@ -1,0 +1,40 @@
+# taxonomy/forbidden-identifiers.yaml
+#
+# Renamed field names that must never reappear. Enforced by CI check 9a
+# (05-repository-and-workflow.md §9), which greps an explicit ALLOWLIST of paths --
+# data/, taxonomy/, tools/, schema/, ingest/, scripts/ -- minus this file and
+# taxonomy/retired-ids.yaml, which list dead identifiers by construction and which a naive
+# grep over taxonomy/ fails against.
+#
+# docs/, adr/, CHANGELOG.md and _plan/ are NEVER scanned, and that is a declared exemption
+# rather than an omission: a rename must stay explainable, and the explanation has to name
+# the old identifier.
+#
+# This is not the same ledger as retired-ids.yaml. That one holds retired *term ids* -- values
+# inside a vocabulary. This one holds *field names* from the schema. A term id may not be
+# reused because someone's citation resolves it; a field name may not reappear because a
+# reader who greps for it would find two spellings of one concept and no way to tell which is
+# current.
+
+version: 0.1.0
+updated: 2026-09-22
+description: >
+  Schema field names that were renamed and must never reappear in a scanned path. Each entry
+  records what it became, when, and where the reasoning lives.
+
+forbidden:
+  - identifier: human_baseline_type
+    renamed_to: ceiling_anchor_type
+    renamed_on: 2026-09-21
+    owner: 02-taxonomy.md §7
+    reason: >
+      Several of the ten anchor terms are not human -- operational-system, noise-ceiling,
+      experimental-replicate and theoretical-maximum -- and the old name made those benchmarks
+      look defective when they are simply not human-referenced. WeatherBench 2's comparator is
+      the ECMWF operational forecast, the Virtual Cell Challenge's is a wet-lab replicate, and
+      Matbench Discovery has no human comparator at any point.
+    note: >
+      02 §7 says "three of the terms below are not human"; 04 §7 names four
+      (operational-system, noise-ceiling, experimental-replicate, theoretical-maximum). The
+      count is stated inconsistently between the two documents. It does not affect this
+      ledger, which forbids the identifier regardless of how many terms motivated the rename.

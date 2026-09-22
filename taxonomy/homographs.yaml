@@ -1,0 +1,68 @@
+# taxonomy/homographs.yaml
+#
+# Declared collisions between a capability id and the leaf segment of a subdomain id.
+# These are PERMITTED. The Capability facet is orthogonal to Domain by design and the same
+# word is often the honest name on both axes. What is forbidden is an UNDECLARED one: an
+# undeclared homograph is a coverage cell whose occupancy nobody has reasoned about.
+#
+# Enforced by CI checks 9d and 9e (05-repository-and-workflow.md §9). 9d asserts the set
+# computed from capabilities.yaml against domains.yaml leaf segments equals the declared set
+# EXACTLY -- failing both on an undeclared collision and on a declared entry that no longer
+# computes, because an allowlist that outlives its entries rots into blanket permission to
+# collide. 9e asserts the four corresponding fine-grid cells are emitted as
+# `degenerate: tautological-homograph` and excluded from gap ranking and from both the
+# numerator and the denominator of every coverage percentage.
+#
+# Four cells of 8,976, and none at all in the coarse grid, which is the only grid that
+# publishes gap claims.
+#
+# Settled by D3, 2026-09-21. Entries are facet-qualified ({facet}:{id}) because a term here
+# appears outside a facet-typed field, so the facet cannot be carried by the field name
+# (04-data-model.md §2).
+
+version: 0.1.0
+updated: 2026-09-22
+description: >
+  The four capability ids that equal a subdomain leaf segment, each declared with the
+  relationship and the reasoning that makes the collision honest rather than accidental.
+
+entries:
+  - capability: capability:planning
+    domain: domain:reasoning-general/planning
+    relationship: same-concept-two-facets
+    rationale: >
+      The subdomain is the literature that studies plan construction as its subject (PlanBench,
+      Blocksworld, travel-planning suites). The capability is the ability wherever it is
+      exercised, which is why it is also tagged on Kaggle Game Arena, on robotics manipulation
+      and on long-horizon agent benchmarks. Same word, two axes, both correct.
+
+  - capability: capability:spatial-reasoning
+    domain: domain:reasoning-general/spatial-reasoning
+    relationship: same-concept-two-facets
+    rationale: >
+      The subdomain covers benchmarks whose stated subject is spatial reasoning presented
+      textually or diagrammatically. The capability is carried by entries in
+      vision/3d-reconstruction, robotics-embodiment/navigation and
+      earth-climate/geospatial-reasoning, none of which belong in the reasoning-general row.
+
+  - capability: capability:temporal-reasoning
+    domain: domain:reasoning-general/temporal-reasoning
+    relationship: same-concept-two-facets
+    rationale: >
+      Same shape as spatial-reasoning. The capability lands on
+      audio-speech/audio-event-detection-localization, vision/video-understanding and
+      medicine-health/ehr-prediction; the subdomain is the reasoning literature specifically.
+
+  - capability: capability:compositional-generalization
+    domain: domain:general-intelligence/compositional-generalization
+    relationship: same-concept-two-facets
+    rationale: >
+      The subdomain is the SCAN/COGS-descended literature in which recombination of primitives
+      is itself the object of study. The capability is defined in 02-taxonomy.md section 4 as
+      "recombining known primitives in unseen configurations" and is tagged on Procgen and
+      Craftax, which are games-planning/procedural-generalization entries.
+
+# `relationship` is an enum: same-concept-two-facets | false-friend. All four current entries
+# are the former. The enum exists so that the first genuine false friend -- a shared word with
+# unshared meaning -- is recorded as one and gets `not_to_be_confused_with` blocks on both
+# terms, instead of being waved through with a copy of a rationale that does not apply to it.
