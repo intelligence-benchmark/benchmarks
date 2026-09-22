@@ -15,4 +15,1699 @@ description: >
   and is never assignable to `domain.primary` or `domain.secondary[]`. Crossed with the
   capability-group rollup, this facet supplies the rows of the coverage matrix.
 
-terms: []
+terms:
+  # -------------------------------------------------------------- biology-genetics
+  - id: biology-genetics
+    label: Biology and genetics
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 25
+    core: true
+    coverage_status: surveyed
+    curation_posture: hand-curate
+    reviewer_signoff: none
+  - id: biology-genetics/protein-structure-prediction
+    label: Protein structure prediction
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: biology-genetics/nucleic-acid-structure
+    label: Nucleic acid structure
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: biology-genetics/protein-function-prediction
+    label: Protein function prediction
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: biology-genetics/protein-fitness-prediction
+    label: Protein fitness prediction
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: biology-genetics/protein-design
+    label: Protein design
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: biology-genetics/protein-protein-interaction
+    label: Protein protein interaction
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: biology-genetics/protein-ligand-cofolding
+    label: Protein ligand cofolding
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: biology-genetics/genomics-variant-effect
+    label: Genomics variant effect
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: biology-genetics/regulatory-genomics
+    label: Regulatory genomics
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: biology-genetics/transcriptomics
+    label: Transcriptomics
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: biology-genetics/single-cell-analysis
+    label: Single cell analysis
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: biology-genetics/perturbation-response-prediction
+    label: Perturbation response prediction
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: biology-genetics/drug-target-interaction
+    label: Drug target interaction
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: biology-genetics/systems-biology
+    label: Systems biology
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: biology-genetics/phylogenetics
+    label: Phylogenetics
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+    gap_placeholder: true   # 02 S3 changelog: kept although empty so the gap matrix can show the hole
+  - id: biology-genetics/bioinformatics-analysis
+    label: Bioinformatics analysis
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: biology-genetics/neuroscience-decoding
+    label: Neuroscience decoding
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: biology-genetics/brain-model-alignment
+    label: Brain model alignment
+    parent: biology-genetics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- robotics-embodiment
+  - id: robotics-embodiment
+    label: Robotics and embodiment
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 25
+    core: true
+    coverage_status: surveyed
+    curation_posture: hand-curate
+    reviewer_signoff: none
+  - id: robotics-embodiment/manipulation
+    label: Manipulation
+    parent: robotics-embodiment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: robotics-embodiment/dexterous-manipulation
+    label: Dexterous manipulation
+    parent: robotics-embodiment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: robotics-embodiment/bimanual-manipulation
+    label: Bimanual manipulation
+    parent: robotics-embodiment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: robotics-embodiment/locomotion
+    label: Locomotion
+    parent: robotics-embodiment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: robotics-embodiment/whole-body-humanoid-control
+    label: Whole body humanoid control
+    parent: robotics-embodiment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: robotics-embodiment/navigation
+    label: Navigation
+    parent: robotics-embodiment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: robotics-embodiment/mobile-manipulation
+    label: Mobile manipulation
+    parent: robotics-embodiment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: robotics-embodiment/continuous-control
+    label: Continuous control
+    parent: robotics-embodiment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: robotics-embodiment/sim2real-transfer
+    label: Sim-to-real transfer
+    parent: robotics-embodiment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: robotics-embodiment/cross-embodiment-transfer
+    label: Cross embodiment transfer
+    parent: robotics-embodiment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: robotics-embodiment/human-robot-interaction
+    label: Human robot interaction
+    parent: robotics-embodiment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: robotics-embodiment/autonomous-driving-planning
+    label: Autonomous driving planning
+    parent: robotics-embodiment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: robotics-embodiment/drone-uav
+    label: Drone and UAV
+    parent: robotics-embodiment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: robotics-embodiment/embodied-instruction-following
+    label: Embodied instruction following
+    parent: robotics-embodiment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: robotics-embodiment/tactile-sensing
+    label: Tactile sensing
+    parent: robotics-embodiment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- vision
+  - id: vision
+    label: Vision
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 22
+    core: false
+    coverage_status: surveyed
+    curation_posture: hand-curate
+    reviewer_signoff: none
+  - id: vision/classification
+    label: Classification
+    parent: vision
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: vision/detection
+    label: Detection
+    parent: vision
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: vision/segmentation
+    label: Segmentation
+    parent: vision
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: vision/video-understanding
+    label: Video understanding
+    parent: vision
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: vision/3d-reconstruction
+    label: 3D reconstruction
+    parent: vision
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: vision/novel-view-synthesis
+    label: Novel view synthesis
+    parent: vision
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: vision/multi-view-stereo
+    label: Multi-view stereo
+    parent: vision
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: vision/image-matching-correspondence
+    label: Image matching correspondence
+    parent: vision
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: vision/image-restoration-enhancement
+    label: Image restoration enhancement
+    parent: vision
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: vision/depth-geometry
+    label: Depth geometry
+    parent: vision
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: vision/driving-perception-3d
+    label: 3D driving perception
+    parent: vision
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: vision/image-generation
+    label: Image generation
+    parent: vision
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: vision/video-generation
+    label: Video generation
+    parent: vision
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: vision/document-understanding
+    label: Document understanding
+    parent: vision
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: vision/ocr-handwriting
+    label: OCR and handwriting
+    parent: vision
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: vision/medical-imaging-cv
+    label: Medical imaging (computer vision)
+    parent: vision
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- agents-tooluse
+  - id: agents-tooluse
+    label: Agents and tool use
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 20
+    core: false
+    coverage_status: surveyed
+    curation_posture: mixed
+    reviewer_signoff: none
+  - id: agents-tooluse/web-navigation
+    label: Web navigation
+    parent: agents-tooluse
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: agents-tooluse/computer-use-gui
+    label: Computer use (GUI)
+    parent: agents-tooluse
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: agents-tooluse/tool-api-calling
+    label: Tool and API calling
+    parent: agents-tooluse
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: agents-tooluse/multi-agent-coordination
+    label: Multi agent coordination
+    parent: agents-tooluse
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: agents-tooluse/long-horizon-autonomy
+    label: Long horizon autonomy
+    parent: agents-tooluse
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: agents-tooluse/research-agents
+    label: Research agents
+    parent: agents-tooluse
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: agents-tooluse/software-agents
+    label: Software agents
+    parent: agents-tooluse
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: agents-tooluse/negotiation
+    label: Negotiation
+    parent: agents-tooluse
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: agents-tooluse/operating-system-tasks
+    label: Operating system tasks
+    parent: agents-tooluse
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: agents-tooluse/cybersecurity-offense-defense
+    label: Cybersecurity offense defense
+    parent: agents-tooluse
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- chemistry-materials
+  - id: chemistry-materials
+    label: Chemistry and materials
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 20
+    core: true
+    coverage_status: surveyed
+    curation_posture: hand-curate
+    reviewer_signoff: none
+  - id: chemistry-materials/molecular-property-prediction
+    label: Molecular property prediction
+    parent: chemistry-materials
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: chemistry-materials/reaction-prediction
+    label: Reaction prediction
+    parent: chemistry-materials
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: chemistry-materials/retrosynthesis
+    label: Retrosynthesis
+    parent: chemistry-materials
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: chemistry-materials/generative-molecular-design
+    label: Generative molecular design
+    parent: chemistry-materials
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: chemistry-materials/catalysis
+    label: Catalysis
+    parent: chemistry-materials
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: chemistry-materials/spectroscopy-interpretation
+    label: Spectroscopy interpretation
+    parent: chemistry-materials
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: chemistry-materials/crystal-structure-prediction
+    label: Crystal structure prediction
+    parent: chemistry-materials
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: chemistry-materials/crystal-stability-discovery
+    label: Crystal stability discovery
+    parent: chemistry-materials
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: chemistry-materials/force-fields-potentials
+    label: Force fields potentials
+    parent: chemistry-materials
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: chemistry-materials/drug-discovery-admet
+    label: Drug discovery admet
+    parent: chemistry-materials
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: chemistry-materials/experimental-hit-finding
+    label: Experimental hit finding
+    parent: chemistry-materials
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: chemistry-materials/lab-automation-protocols
+    label: Lab automation protocols
+    parent: chemistry-materials
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- medicine-health
+  - id: medicine-health
+    label: Medicine and health
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 20
+    core: true
+    coverage_status: surveyed
+    curation_posture: hand-curate
+    reviewer_signoff: none
+  - id: medicine-health/clinical-qa
+    label: Clinical QA
+    parent: medicine-health
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: medicine-health/clinical-dialogue
+    label: Clinical dialogue
+    parent: medicine-health
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: medicine-health/diagnosis-triage
+    label: Diagnosis triage
+    parent: medicine-health
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: medicine-health/medical-imaging-diagnostic
+    label: Medical imaging diagnostic
+    parent: medicine-health
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: medicine-health/medical-imaging-segmentation
+    label: Medical imaging segmentation
+    parent: medicine-health
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: medicine-health/radiology-report-generation
+    label: Radiology report generation
+    parent: medicine-health
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: medicine-health/ehr-prediction
+    label: EHR prediction
+    parent: medicine-health
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: medicine-health/clinical-agent-workflows
+    label: Clinical agent workflows
+    parent: medicine-health
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: medicine-health/biomedical-literature
+    label: Biomedical literature
+    parent: medicine-health
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: medicine-health/treatment-planning
+    label: Treatment planning
+    parent: medicine-health
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: medicine-health/medical-safety
+    label: Medical safety
+    parent: medicine-health
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: medicine-health/mental-health
+    label: Mental health
+    parent: medicine-health
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- audio-speech
+  - id: audio-speech
+    label: Audio and speech
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 18
+    core: true
+    coverage_status: surveyed
+    curation_posture: hand-curate
+    reviewer_signoff: none
+  - id: audio-speech/speech-recognition
+    label: Speech recognition
+    parent: audio-speech
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: audio-speech/speech-synthesis
+    label: Speech synthesis
+    parent: audio-speech
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: audio-speech/speaker-tasks
+    label: Speaker tasks
+    parent: audio-speech
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: audio-speech/speech-translation
+    label: Speech translation
+    parent: audio-speech
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: audio-speech/music-generation
+    label: Music generation
+    parent: audio-speech
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: audio-speech/music-understanding
+    label: Music understanding
+    parent: audio-speech
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: audio-speech/audio-event-understanding
+    label: Audio event understanding
+    parent: audio-speech
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: audio-speech/audio-event-detection-localization
+    label: Audio event detection localization
+    parent: audio-speech
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: audio-speech/machine-condition-monitoring
+    label: Machine condition monitoring
+    parent: audio-speech
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: audio-speech/bioacoustics
+    label: Bioacoustics
+    parent: audio-speech
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- earth-climate
+  - id: earth-climate
+    label: Earth and climate
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 18
+    core: true
+    coverage_status: surveyed
+    curation_posture: hand-curate
+    reviewer_signoff: none
+  - id: earth-climate/weather-forecasting
+    label: Weather forecasting
+    parent: earth-climate
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: earth-climate/climate-projection
+    label: Climate projection
+    parent: earth-climate
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: earth-climate/remote-sensing
+    label: Remote sensing
+    parent: earth-climate
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: earth-climate/geospatial-reasoning
+    label: Geospatial reasoning
+    parent: earth-climate
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: earth-climate/hazard-prediction
+    label: Hazard prediction
+    parent: earth-climate
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: earth-climate/ecology-biodiversity
+    label: Ecology biodiversity
+    parent: earth-climate
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: earth-climate/agriculture
+    label: Agriculture
+    parent: earth-climate
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: earth-climate/energy-systems
+    label: Energy systems
+    parent: earth-climate
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- physics
+  - id: physics
+    label: Physics
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 18
+    core: true
+    coverage_status: surveyed
+    curation_posture: hand-curate
+    reviewer_signoff: none
+  - id: physics/simulation-surrogates
+    label: Simulation surrogates
+    parent: physics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: physics/fluid-dynamics
+    label: Fluid dynamics
+    parent: physics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: physics/particle-physics
+    label: Particle physics
+    parent: physics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: physics/astrophysics-cosmology
+    label: Astrophysics cosmology
+    parent: physics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: physics/condensed-matter
+    label: Condensed matter
+    parent: physics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: physics/quantum-systems
+    label: Quantum systems
+    parent: physics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: physics/optics-photonics
+    label: Optics photonics
+    parent: physics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: physics/symbolic-regression-discovery
+    label: Symbolic regression discovery
+    parent: physics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: physics/plasma-fusion
+    label: Plasma fusion
+    parent: physics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: physics/physics-reasoning
+    label: Physics reasoning
+    parent: physics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- safety-alignment
+  - id: safety-alignment
+    label: Safety and alignment
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 18
+    core: false
+    coverage_status: surveyed
+    curation_posture: mixed
+    reviewer_signoff: none
+  - id: safety-alignment/harmlessness-refusal
+    label: Harmlessness refusal
+    parent: safety-alignment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: safety-alignment/agentic-harm
+    label: Agentic harm
+    parent: safety-alignment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: safety-alignment/honesty-truthfulness
+    label: Honesty truthfulness
+    parent: safety-alignment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: safety-alignment/sycophancy
+    label: Sycophancy
+    parent: safety-alignment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: safety-alignment/jailbreak-robustness
+    label: Jailbreak robustness
+    parent: safety-alignment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: safety-alignment/prompt-injection
+    label: Prompt injection
+    parent: safety-alignment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: safety-alignment/bias-fairness
+    label: Bias fairness
+    parent: safety-alignment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: safety-alignment/privacy-memorization
+    label: Privacy memorization
+    parent: safety-alignment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: safety-alignment/unlearning-knowledge-removal
+    label: Unlearning knowledge removal
+    parent: safety-alignment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: safety-alignment/dangerous-capability-evals
+    label: Dangerous capability evaluations
+    parent: safety-alignment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: safety-alignment/deception-scheming
+    label: Deception scheming
+    parent: safety-alignment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: safety-alignment/evaluation-awareness
+    label: Evaluation awareness
+    parent: safety-alignment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: safety-alignment/control-oversight
+    label: Control oversight
+    parent: safety-alignment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: safety-alignment/interpretability-probes
+    label: Interpretability probes
+    parent: safety-alignment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: safety-alignment/sandbagging
+    label: Sandbagging
+    parent: safety-alignment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: safety-alignment/value-alignment
+    label: Value alignment
+    parent: safety-alignment
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- code
+  - id: code
+    label: Code
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 16
+    core: false
+    coverage_status: surveyed
+    curation_posture: ingest-then-verify
+    reviewer_signoff: none
+  - id: code/function-synthesis
+    label: Function synthesis
+    parent: code
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: code/repository-scale-se
+    label: Repository-scale software engineering
+    parent: code
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: code/bug-repair
+    label: Bug repair
+    parent: code
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: code/competitive-programming
+    label: Competitive programming
+    parent: code
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: code/code-understanding
+    label: Code understanding
+    parent: code
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: code/program-verification
+    label: Program verification
+    parent: code
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: code/ml-engineering
+    label: ML engineering
+    parent: code
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: code/data-science-workflows
+    label: Data science workflows
+    parent: code
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: code/code-performance-optimization
+    label: Code performance optimization
+    parent: code
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- language
+  - id: language
+    label: Language
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 14
+    core: false
+    coverage_status: surveyed
+    curation_posture: ingest-then-verify
+    reviewer_signoff: none
+  - id: language/understanding
+    label: Understanding
+    parent: language
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: language/generation
+    label: Generation
+    parent: language
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: language/dialogue
+    label: Dialogue
+    parent: language
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: language/summarization
+    label: Summarization
+    parent: language
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: language/translation
+    label: Translation
+    parent: language
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: language/multilingual
+    label: Multilingual
+    parent: language
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: language/low-resource-languages
+    label: Low resource languages
+    parent: language
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: language/long-context
+    label: Long context
+    parent: language
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: language/retrieval-qa
+    label: Retrieval QA
+    parent: language
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: language/information-extraction
+    label: Information extraction
+    parent: language
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: language/creative-writing
+    label: Creative writing
+    parent: language
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- society-econ-law
+  - id: society-econ-law
+    label: Society, economics and law
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 14
+    core: false
+    coverage_status: surveyed
+    curation_posture: mixed
+    reviewer_signoff: none
+  - id: society-econ-law/economically-valuable-work
+    label: Economically valuable work
+    parent: society-econ-law
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: society-econ-law/finance-forecasting
+    label: Finance forecasting
+    parent: society-econ-law
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: society-econ-law/financial-analysis
+    label: Financial analysis
+    parent: society-econ-law
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: society-econ-law/trading-market-interaction
+    label: Trading market interaction
+    parent: society-econ-law
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: society-econ-law/legal-reasoning
+    label: Legal reasoning
+    parent: society-econ-law
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: society-econ-law/legal-document
+    label: Legal document
+    parent: society-econ-law
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: society-econ-law/economics-simulation
+    label: Economics simulation
+    parent: society-econ-law
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: society-econ-law/education-tutoring
+    label: Education tutoring
+    parent: society-econ-law
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: society-econ-law/policy-analysis
+    label: Policy analysis
+    parent: society-econ-law
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: society-econ-law/social-simulation
+    label: Social simulation
+    parent: society-econ-law
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: society-econ-law/forecasting-prediction-markets
+    label: Forecasting prediction markets
+    parent: society-econ-law
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- engineering-design
+  - id: engineering-design
+    label: Engineering and design
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 12
+    core: false
+    coverage_status: surveyed
+    curation_posture: hand-curate
+    reviewer_signoff: none
+  - id: engineering-design/cad-geometry-generation
+    label: CAD geometry generation
+    parent: engineering-design
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: engineering-design/circuit-eda
+    label: Circuit and EDA design
+    parent: engineering-design
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: engineering-design/structural-mechanical-design
+    label: Structural mechanical design
+    parent: engineering-design
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: engineering-design/process-control-optimization
+    label: Process control optimization
+    parent: engineering-design
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: engineering-design/experimental-apparatus-design
+    label: Experimental apparatus design
+    parent: engineering-design
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: engineering-design/lab-automation-execution
+    label: Lab automation execution
+    parent: engineering-design
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- games-planning
+  - id: games-planning
+    label: Games and planning
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 12
+    core: false
+    coverage_status: surveyed
+    curation_posture: ingest-then-verify
+    reviewer_signoff: none
+  - id: games-planning/board-games
+    label: Board games
+    parent: games-planning
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: games-planning/card-imperfect-information
+    label: Card and imperfect-information games
+    parent: games-planning
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: games-planning/video-games
+    label: Video games
+    parent: games-planning
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: games-planning/real-time-strategy
+    label: Real time strategy
+    parent: games-planning
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: games-planning/puzzle-games
+    label: Puzzle games
+    parent: games-planning
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: games-planning/open-ended-environments
+    label: Open ended environments
+    parent: games-planning
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: games-planning/procedural-generalization
+    label: Procedural generalization
+    parent: games-planning
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: games-planning/game-theory
+    label: Game theory
+    parent: games-planning
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: games-planning/multi-agent-social
+    label: Multi agent social
+    parent: games-planning
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- general-intelligence
+  - id: general-intelligence
+    label: General intelligence
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 12
+    core: false
+    coverage_status: surveyed
+    curation_posture: ingest-then-verify
+    reviewer_signoff: none
+  - id: general-intelligence/abstraction-generalization
+    label: Abstraction generalization
+    parent: general-intelligence
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: general-intelligence/novel-task-acquisition
+    label: Novel task acquisition
+    parent: general-intelligence
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: general-intelligence/human-comparison-batteries
+    label: Human comparison batteries
+    parent: general-intelligence
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: general-intelligence/meta-learning
+    label: Meta learning
+    parent: general-intelligence
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: general-intelligence/open-ended-discovery
+    label: Open ended discovery
+    parent: general-intelligence
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: general-intelligence/compositional-generalization
+    label: Compositional generalization
+    parent: general-intelligence
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: general-intelligence/agi-composite-suites
+    label: AGI composite suites
+    parent: general-intelligence
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- mathematics
+  - id: mathematics
+    label: Mathematics
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 12
+    core: false
+    coverage_status: surveyed
+    curation_posture: ingest-then-verify
+    reviewer_signoff: none
+  - id: mathematics/arithmetic
+    label: Arithmetic
+    parent: mathematics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: mathematics/competition-math
+    label: Competition math
+    parent: mathematics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: mathematics/formal-theorem-proving
+    label: Formal theorem proving
+    parent: mathematics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: mathematics/symbolic-manipulation
+    label: Symbolic manipulation
+    parent: mathematics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: mathematics/applied-modeling
+    label: Applied modeling
+    parent: mathematics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: mathematics/research-level-math
+    label: Research level math
+    parent: mathematics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: mathematics/proof-verification
+    label: Proof verification
+    parent: mathematics
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- multimodal
+  - id: multimodal
+    label: Multimodal
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 12
+    core: false
+    coverage_status: surveyed
+    curation_posture: hand-curate
+    reviewer_signoff: none
+  - id: multimodal/visual-qa
+    label: Visual QA
+    parent: multimodal
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: multimodal/visual-grounding
+    label: Visual grounding
+    parent: multimodal
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: multimodal/chart-diagram-understanding
+    label: Chart diagram understanding
+    parent: multimodal
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: multimodal/video-language
+    label: Video language
+    parent: multimodal
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: multimodal/audio-language
+    label: Audio language
+    parent: multimodal
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: multimodal/any-to-any-generation
+    label: Any to any generation
+    parent: multimodal
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: multimodal/cross-modal-retrieval
+    label: Cross modal retrieval
+    parent: multimodal
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
+  # -------------------------------------------------------------- reasoning-general
+  - id: reasoning-general
+    label: General reasoning
+    parent: null
+    status: active
+    introduced_in: 1.0.0
+    source: own
+    definition: ""            # authored in P0-S2-T04
+    seed_target: 12
+    core: false
+    coverage_status: surveyed
+    curation_posture: ingest-then-verify
+    reviewer_signoff: none
+  - id: reasoning-general/commonsense
+    label: Commonsense
+    parent: reasoning-general
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: reasoning-general/logical-deduction
+    label: Logical deduction
+    parent: reasoning-general
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: reasoning-general/causal-inference
+    label: Causal inference
+    parent: reasoning-general
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: reasoning-general/abstraction-induction
+    label: Abstraction induction
+    parent: reasoning-general
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: reasoning-general/temporal-reasoning
+    label: Temporal reasoning
+    parent: reasoning-general
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: reasoning-general/spatial-reasoning
+    label: Spatial reasoning
+    parent: reasoning-general
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: reasoning-general/planning
+    label: Planning
+    parent: reasoning-general
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: reasoning-general/theory-of-mind
+    label: Theory of mind
+    parent: reasoning-general
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: reasoning-general/counterfactual
+    label: Counterfactual
+    parent: reasoning-general
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+  - id: reasoning-general/puzzle-solving
+    label: Puzzle solving
+    parent: reasoning-general
+    status: proposed
+    introduced_in: 1.0.0
+    source: own
+    definition: ""
+
