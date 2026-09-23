@@ -1,6 +1,6 @@
 # taxonomy/domains.yaml
 #
-# Facet 2 of 8. Scaffolded empty by P0-S1-T01; terms are authored in P0-S1-T02 (domains)
+# Facet 1 of 8, the navigational spine. Scaffolded empty by P0-S1-T01; terms are authored in P0-S1-T02 (domains)
 # and P0-S2 (all others). Header keys are fixed by the FacetFile schema in
 # _plan/04-data-model.md S16; `version` is the taxonomy version (03 S10), not the schema
 # version. `facet_kind` takes `navigational` or `flat` per that same schema.
@@ -23,7 +23,33 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose subject is a biological molecule, system or signal.
+    inclusion_test: >
+      Tag this as PRIMARY if the scored quantity concerns proteins, nucleic acids, cells,
+      organisms or neural activity.
+    exclusion_test: >
+      Do NOT tag this if the subject is a small molecule evaluated as a drug candidate, which is
+      `chemistry-materials/drug-discovery-admet`, and do NOT tag it where the endpoint is a
+      clinical outcome, which is `medicine-health`.
+    examples:
+      - ref: casp16
+        qualifies: true
+        why: >
+          Protein and nucleic-acid structure prediction, assessed across dozens of groups.
+      - ref: proteingym
+        qualifies: true
+        why: >
+          Deep mutational scanning assays scored by rank correlation.
+      - ref: virtual-cell-challenge-2026
+        qualifies: true
+        why: >
+          Zero-shot perturbation response in unseen cell lines.
+      - ref: healthbench
+        qualifies: false
+        why: >
+          NEAR MISS. Biomedical throughout, but the endpoint is clinical conversation quality,
+          which is `medicine-health`.
     seed_target: 25
     core: true
     coverage_status: surveyed
@@ -164,7 +190,29 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks in which a policy acts through a physical or simulated body.
+    inclusion_test: >
+      Tag this as PRIMARY if the scored outcome is produced by embodied action -- manipulation,
+      locomotion, navigation or driving.
+    exclusion_test: >
+      Do NOT tag this if the environment is symbolic with no body, and do NOT tag it where a
+      physical apparatus is designed rather than operated, which is `engineering-design`.
+    examples:
+      - ref: humanoidbench
+        qualifies: true
+        why: >
+          Whole-body humanoid control across 27 to 31 tasks with dexterous hands.
+      - ref: libero
+        qualifies: true
+        why: >
+          130 language-conditioned manipulation tasks, entirely in simulation.
+      - ref: mujoco-gymnasium
+        qualifies: false
+        why: >
+          NEAR MISS. Simulated bodies, but the benchmark's community and claim are about control
+          algorithms in the abstract, which is why continuous-control sits here only when the
+          embodiment is the point.
     seed_target: 25
     core: true
     coverage_status: surveyed
@@ -283,7 +331,37 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose input or output is visual and whose scored quantity is a property of that
+      visual signal.
+    inclusion_test: >
+      Tag this as PRIMARY if the score measures what was recovered from, or produced as, an
+      image, video or 3D signal.
+    exclusion_test: >
+      Do NOT tag this if the scored relation is between a visual signal and language -- a
+      question answered about an image, an expression grounded in a scene, a caption retrieved
+      for a photo -- which is `multimodal`. A text prompt that merely conditions generation does
+      not make a benchmark multimodal; the discriminant is whether crossing between the
+      modalities is what is scored.
+    examples:
+      - ref: coco
+        qualifies: true
+        why: >
+          Detection and segmentation scored directly against image content.
+      - ref: scannetpp
+        qualifies: true
+        why: >
+          Dense 3D scene understanding scored as reconstruction and segmentation quality.
+      - ref: vbench
+        qualifies: true
+        why: >
+          Generated video scored on sixteen dimensions of the video itself, although a text
+          prompt conditioned it.
+      - ref: geneval
+        qualifies: false
+        why: >
+          NEAR MISS. Generated images, but the score is whether the image satisfies a
+          compositional description, which makes the image-text relation the measured quantity.
     seed_target: 22
     core: false
     coverage_status: surveyed
@@ -409,7 +487,33 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose subject is a system acting autonomously through tools or interfaces.
+    inclusion_test: >
+      Tag this as PRIMARY if the scored quantity is what an autonomous loop achieved using
+      tools, APIs, a browser or an operating system.
+    exclusion_test: >
+      Do NOT tag this if the environment is a game, which is `games-planning`, and do NOT tag it
+      where the scored artifact is software rather than the act of operating a machine.
+    examples:
+      - ref: osworld-2-0
+        qualifies: true
+        why: >
+          Dozens of interdependent GUI actions against live application state.
+      - ref: tau2-bench
+        qualifies: true
+        why: >
+          Multi-turn tool-and-user interaction scored under a domain policy.
+      - ref: terminal-bench
+        qualifies: true
+        why: >
+          Operating a machine to a target state, where harness choice alone moves results
+          several points.
+      - ref: swe-bench-verified
+        qualifies: false
+        why: >
+          NEAR MISS. Solved almost entirely by agents, but the scored artifact is a patch judged
+          by tests, which is `code`.
     seed_target: 20
     core: false
     coverage_status: surveyed
@@ -493,7 +597,35 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose subject is a molecule, material, reaction or catalyst.
+    inclusion_test: >
+      Tag this as PRIMARY if the scored quantity is a property, structure or behaviour of matter
+      at the molecular or crystalline scale, whatever method produces it.
+    exclusion_test: >
+      Do NOT tag this if the subject is a physical process rather than a substance, which is
+      `physics`. The family is named for both communities deliberately: method does not decide
+      the home, subject does, so a DFT-grounded materials benchmark is chemistry-materials and a
+      quantum-simulation benchmark is physics.
+    examples:
+      - ref: matbench-discovery
+        qualifies: true
+        why: >
+          Stability screening over 256k structures; the subject is the material.
+      - ref: open-catalyst
+        qualifies: true
+        why: >
+          Catalyst surfaces and adsorption energies, evaluated with physics-derived methods on a
+          chemical subject.
+      - ref: cache
+        qualifies: true
+        why: >
+          Prospective hit-finding with real binding assays.
+      - ref: critpt
+        qualifies: false
+        why: >
+          NEAR MISS. Research-level science, but the subject is physics reasoning rather than
+          matter.
     seed_target: 20
     core: true
     coverage_status: surveyed
@@ -591,7 +723,29 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose subject is clinical practice or a patient outcome.
+    inclusion_test: >
+      Tag this as PRIMARY if the scored quantity concerns diagnosis, treatment, clinical
+      communication or a health endpoint.
+    exclusion_test: >
+      Do NOT tag this if the subject is biological mechanism without a clinical endpoint, which
+      is `biology-genetics`, and do NOT tag it where medical images are used to test general
+      vision methods.
+    examples:
+      - ref: healthbench
+        qualifies: true
+        why: >
+          5,000 multi-turn clinical conversations against physician-authored rubric criteria.
+      - ref: medagentbench-v2
+        qualifies: true
+        why: >
+          Physician-written tasks against a live FHIR record.
+      - ref: proteingym
+        qualifies: false
+        why: >
+          NEAR MISS. Deeply biomedical, but the scored quantity is a protein fitness measurement
+          with no clinical endpoint.
     seed_target: 20
     core: true
     coverage_status: surveyed
@@ -689,7 +843,33 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose input or output is an acoustic signal.
+    inclusion_test: >
+      Tag this as PRIMARY if the score measures what was recovered from, or produced as, audio.
+    exclusion_test: >
+      Do NOT tag this if the scored relation is between audio and language as two modalities,
+      which is `multimodal/audio-language`, and do NOT tag it where the audio is only the
+      delivery medium for a text task.
+    examples:
+      - ref: open-asr-leaderboard
+        qualifies: true
+        why: >
+          Word error rate over raw audio; the signal is what is being handled.
+      - ref: dcase-2026
+        qualifies: true
+        why: >
+          Sound event detection, localisation and machine condition monitoring, all scored on
+          the acoustic signal.
+      - ref: birdclef-plus
+        qualifies: true
+        why: >
+          Species identification from soundscapes, with ecology as a secondary domain.
+      - ref: healthbench
+        qualifies: false
+        why: >
+          NEAR MISS. Multi-turn clinical dialogue, which reads as speech, but it is conducted in
+          text and nothing acoustic is scored.
     seed_target: 18
     core: true
     coverage_status: surveyed
@@ -773,7 +953,33 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose subject is the Earth system or a process within it.
+    inclusion_test: >
+      Tag this as PRIMARY if the scored quantity is weather, climate, land surface, hazard,
+      ecology or energy in a geophysical setting.
+    exclusion_test: >
+      Do NOT tag this if the subject is a generic vision task that happens to use satellite
+      imagery, and do NOT tag it where the physical process is studied outside an Earth-system
+      context, which is `physics`.
+    examples:
+      - ref: weatherbench-2
+        qualifies: true
+        why: >
+          Forecast skill against operational analysis; the subject is the atmosphere.
+      - ref: geo-bench-2
+        qualifies: true
+        why: >
+          Geospatial tasks over held-out regions and sensors.
+      - ref: smart-buildings-challenge
+        qualifies: true
+        why: >
+          Building energy optimisation as a real-world control task.
+      - ref: open-catalyst
+        qualifies: false
+        why: >
+          NEAR MISS. Energy-relevant and physically grounded, but the subject is catalyst
+          chemistry rather than an Earth-system process.
     seed_target: 18
     core: true
     coverage_status: surveyed
@@ -843,7 +1049,31 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose subject is a physical system or a physical reasoning competence.
+    inclusion_test: >
+      Tag this as PRIMARY if the scored quantity is a physical observable, a simulation of a
+      physical process, or research-level physics reasoning.
+    exclusion_test: >
+      Do NOT tag this if the system is a molecule, crystal, catalyst or material, which is
+      `chemistry-materials` even when the method is physics -- the archive kept
+      `physics/materials-science` and `chemistry/crystal-structure-prediction` competing for the
+      same entries, and Matbench Discovery, Open Catalyst and OMol25 were classifiable both ways
+      until materials moved to one home named for both communities.
+    examples:
+      - ref: critpt
+        qualifies: true
+        why: >
+          71 research-level physics challenges written by active researchers.
+      - ref: fair-universe-higgsml-uncertainty
+        qualifies: true
+        why: >
+          Particle-physics signal strength under systematic nuisance parameters.
+      - ref: matbench-discovery
+        qualifies: false
+        why: >
+          NEAR MISS. DFT-grounded and thoroughly physical in method, but the subject is crystal
+          stability, so it is `chemistry-materials`.
     seed_target: 18
     core: true
     coverage_status: surveyed
@@ -927,7 +1157,28 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose subject is whether a system behaves acceptably rather than capably.
+    inclusion_test: >
+      Tag this as PRIMARY if the scored quantity is refusal, robustness to attack, honesty,
+      bias, or a frontier-risk property.
+    exclusion_test: >
+      Do NOT tag this if harmful content appears but nothing about conduct is scored, and do NOT
+      tag it where the failure measured is ordinary inaccuracy.
+    examples:
+      - ref: helm-safety
+        qualifies: true
+        why: >
+          Harmless completion scored across a defined harm taxonomy.
+      - ref: jailbreakbench
+        qualifies: true
+        why: >
+          Attack success rate, with a denominator that moves as new attacks are published.
+      - ref: humanitys-last-exam
+        qualifies: false
+        why: >
+          NEAR MISS. Includes hazardous subject matter, but scores only whether answers are
+          correct.
     seed_target: 18
     core: false
     coverage_status: surveyed
@@ -1053,7 +1304,24 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose scored artifact is software.
+    inclusion_test: >
+      Tag this as PRIMARY if what is submitted is code and correctness is judged by running,
+      testing or verifying it.
+    exclusion_test: >
+      Do NOT tag this if code is the means to a result in another field, and do NOT tag it where
+      the subject is operating a computer rather than authoring software.
+    examples:
+      - ref: swe-bench-verified
+        qualifies: true
+        why: >
+          Issue-resolving patches judged by fail-to-pass and pass-to-pass test sets.
+      - ref: terminal-bench
+        qualifies: false
+        why: >
+          NEAR MISS. Commands and scripts throughout, but the task is operating a machine to an
+          end state, which is `agents-tooluse`.
     seed_target: 16
     core: false
     coverage_status: surveyed
@@ -1130,7 +1398,26 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose subject is the production or interpretation of natural language itself.
+    inclusion_test: >
+      Tag this as PRIMARY if the thing being measured is a language competence -- understanding,
+      generation, translation, summarisation or retrieval over text.
+    exclusion_test: >
+      Do NOT tag this if language is only the interface to a subject that is measured elsewhere:
+      a physics question asked in English is `physics`, and a coding task described in English
+      is `code`.
+    examples:
+      - ref: mmlu-pro
+        qualifies: false
+        why: >
+          NEAR MISS. Text throughout, but what is measured is breadth of knowledge across
+          subjects, which is `general-intelligence`.
+      - ref: open-asr-leaderboard
+        qualifies: false
+        why: >
+          NEAR MISS. Language is the content, but the scored act is recovering it from an audio
+          signal, which is `audio-speech`.
     seed_target: 14
     core: false
     coverage_status: surveyed
@@ -1221,7 +1508,34 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose subject is economic, legal or social activity.
+    inclusion_test: >
+      Tag this as PRIMARY if the scored quantity concerns work, markets, legal reasoning, policy
+      or social behaviour.
+    exclusion_test: >
+      Do NOT tag this if the benchmark measures a general competence using economic content as
+      material, and do NOT tag it where the subject is autonomous operation rather than the
+      economic value of the output.
+    examples:
+      - ref: gdpval
+        qualifies: true
+        why: >
+          1,320 tasks across 44 occupations in the top nine US GDP sectors, graded blind by
+          experts.
+      - ref: forecastbench
+        qualifies: true
+        why: >
+          Forecasting questions resolving against real-world outcomes.
+      - ref: remote-labor-index
+        qualifies: true
+        why: >
+          Completion of real remote work as the scored quantity.
+      - ref: osworld-2-0
+        qualifies: false
+        why: >
+          NEAR MISS. The tasks are economically valuable computer work, but what is scored is
+          autonomous operation of an interface, which is `agents-tooluse`.
     seed_target: 14
     core: false
     coverage_status: surveyed
@@ -1312,7 +1626,32 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose scored artifact is a designed physical or computational system.
+    inclusion_test: >
+      Tag this as PRIMARY if what is submitted is a design -- geometry, a circuit, a structure,
+      a protocol or an apparatus -- judged against engineering criteria.
+    exclusion_test: >
+      Do NOT tag this if the design is operated rather than produced, which is
+      `robotics-embodiment`, and do NOT tag it where the artifact is software, which is `code`.
+    examples:
+      - ref: cadeval
+        qualifies: true
+        why: >
+          Generated OpenSCAD geometry scored by Chamfer and Hausdorff tolerance.
+      - ref: autolabs
+        qualifies: true
+        why: >
+          Natural language converted to an executable liquid-handler protocol.
+      - ref: learn2design-2026
+        qualifies: true
+        why: >
+          Optimises the experimental design of gravitational-wave detectors.
+      - ref: smart-buildings-challenge
+        qualifies: false
+        why: >
+          NEAR MISS. Engineering subject matter, but the scored act is operating a building's
+          energy system, not designing one.
     seed_target: 12
     core: false
     coverage_status: surveyed
@@ -1368,7 +1707,29 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks in which an agent plays a game or acts in a rule-governed interactive
+      environment.
+    inclusion_test: >
+      Tag this as PRIMARY if the score comes from episodes played against an environment or an
+      opponent that responds.
+    exclusion_test: >
+      Do NOT tag this if a problem is posed and one solution submitted, which is
+      `reasoning-general/puzzle-solving`; the discriminant is the protocol, not the topic.
+    examples:
+      - ref: kaggle-game-arena
+        qualifies: true
+        why: >
+          All-play-all across chess, poker and other games, with the roster shaping the rating.
+      - ref: craftax
+        qualifies: true
+        why: >
+          Open-ended achievement progression against a responding environment.
+      - ref: planbench
+        qualifies: false
+        why: >
+          NEAR MISS. Plans and actions, but the item is a posed problem with a submitted answer
+          and no environment responds.
     seed_target: 12
     core: false
     coverage_status: surveyed
@@ -1445,7 +1806,33 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose claim is about breadth or novelty across many subjects rather than
+      competence in one.
+    inclusion_test: >
+      Tag this as PRIMARY if the benchmark's own claim is coverage of many fields, or
+      acquisition of tasks it was not built for.
+    exclusion_test: >
+      Do NOT tag this if the benchmark is broad but its claim is about one competence, and do
+      NOT use this family as a home for benchmarks that were hard to place.
+    examples:
+      - ref: arc-agi
+        qualifies: true
+        why: >
+          Novel-task acquisition with deliberately unhelpful surface similarity.
+      - ref: mmlu-pro
+        qualifies: true
+        why: >
+          Breadth across fourteen subjects is the entire claim.
+      - ref: gpqa-diamond
+        qualifies: true
+        why: >
+          Graduate-level breadth across three sciences with a stated chance baseline.
+      - ref: frontiermath
+        qualifies: false
+        why: >
+          NEAR MISS. Extremely hard and widely cited as a frontier measure, but its claim is
+          mathematical competence specifically.
     seed_target: 12
     core: false
     coverage_status: surveyed
@@ -1508,7 +1895,25 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose scored quantity is a mathematical result, proof or derivation.
+    inclusion_test: >
+      Tag this as PRIMARY if the answer is checked as mathematics -- a value, an expression or a
+      proof.
+    exclusion_test: >
+      Do NOT tag this if arithmetic is incidental to a question about another field, and do NOT
+      tag it where the artifact scored is a program rather than a derivation.
+    examples:
+      - ref: frontiermath
+        qualifies: true
+        why: >
+          Research-level problems whose answers are checked as mathematics, including a
+          Lean-verified track.
+      - ref: critpt
+        qualifies: false
+        why: >
+          NEAR MISS. Heavily quantitative, but the problems are physics research challenges and
+          the subject is physics.
     seed_target: 12
     core: false
     coverage_status: surveyed
@@ -1571,7 +1976,32 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose scored quantity is the relation between two or more modalities.
+    inclusion_test: >
+      Tag this as PRIMARY if success requires crossing between modalities -- answering in
+      language about an image, binding an expression to a region, retrieving across modalities,
+      or generating in one modality from another such that the correspondence is what is scored.
+    exclusion_test: >
+      Do NOT tag this if the benchmark is scored wholly inside one modality, which is `vision`
+      or `audio-speech`. The boundary is the correspondence: VQA scores whether the answer
+      matches the image, whereas image restoration scores the image alone.
+    examples:
+      - ref: geneval
+        qualifies: true
+        why: >
+          Scores whether a generated image satisfies a compositional text description; the
+          image-text correspondence is the measured quantity.
+      - ref: coco
+        qualifies: false
+        why: >
+          NEAR MISS. Labels and boxes, but from a fixed category set with no language to
+          correspond to.
+      - ref: vbench
+        qualifies: false
+        why: >
+          NEAR MISS. Text-prompted video generation, but the sixteen scored dimensions are
+          properties of the video, not of its agreement with the prompt.
     seed_target: 12
     core: false
     coverage_status: surveyed
@@ -1634,7 +2064,26 @@ terms:
     status: active
     introduced_in: 1.0.0
     source: own
-    definition: ""            # authored in P0-S2-T04
+    definition: >
+      Benchmarks whose subject is a reasoning competence studied in its own right, independent
+      of any application domain.
+    inclusion_test: >
+      Tag this as PRIMARY if the benchmark's own literature treats the reasoning form --
+      deduction, causality, planning, theory of mind -- as the object of study.
+    exclusion_test: >
+      Do NOT tag this if the reasoning is applied to a field that has its own family, and do NOT
+      tag it where breadth across many subjects is the point, which is `general-intelligence`.
+    examples:
+      - ref: planbench
+        qualifies: true
+        why: >
+          Plan construction studied as its own subject, in a deliberately content-free action
+          model.
+      - ref: gpqa-diamond
+        qualifies: false
+        why: >
+          NEAR MISS. Demands hard reasoning, but over graduate-level domain content, and the
+          benchmark's claim is about knowledge breadth.
     seed_target: 12
     core: false
     coverage_status: surveyed
